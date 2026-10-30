@@ -4,6 +4,13 @@ No reverse-engineering tool binaries are shipped in this repository. The install
 (`bootstrap.ps1` / `bootstrap.sh`) download each tool from its official upstream
 release at install time. Each tool remains under its own license, listed below.
 
+## Vendored source
+
+- `dissectdat/` — **REA (Reverse Engineer Anything)**, https://github.com/morluto/rea,
+  MIT License (Copyright © 2026 morluto). The full license text is at
+  `dissectdat/LICENSE`. This vendored source is **not** covered by this repository's
+  MIT license; it retains its own license and copyright.
+
 | Tool | Upstream | License |
 | --- | --- | --- |
 | Ghidra | https://github.com/NationalSecurityAgency/ghidra | Apache-2.0 (some modules GPL-3.0) |
