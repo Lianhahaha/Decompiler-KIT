@@ -1,0 +1,14 @@
+# tools downloaded by bootstrap
+tools/
+_downloads/
+install.log
+MANIFEST.csv
+*.pyc
+__pycache__/
+.DS_Store
+
+# local analysis output (keep out of search + context)
+*.har
+*.log
+dumps/
+_decompiled/
