@@ -61,6 +61,24 @@ a bootstrap + manifest; running the bootstrapper is the intended install path.
   already extracted.
 - Do not commit anything under `tools/`; it is gitignored and machine-specific.
 
+## Using the toolkit for a real task (decompile / RE a target)
+
+After the install step, the user only needs to prompt you with the target path and the goal.
+You do the tool selection:
+
+- Example prompts: "decompile `C:\games\foo\foo.exe` with this kit", "this is a Unity IL2CPP
+  game — pull the classes and hook `Player.Health`", "diff these two builds", "unpack this
+  `.pak` and decompile the scripts".
+- Before choosing a tool, read `SKILL.md` in this repo: it maps the target (native PE/ELF,
+  Unity Mono vs IL2CPP, .NET, Android APK, Xbox/Xbox 360/N64/GBA) to the exact command and
+  install path.
+- Resolve paths from `GAME_RE_ROOT` (do not assume `tools/` next to the repo). Versioned tools
+  (Ghidra, rizin, Cutter) live inside a version subdirectory — resolve it, don't hardcode it.
+- Use non-interactive modes for automation: Ghidra `support/analyzeHeadless.bat`, rizin `-q -c`,
+  RetDec CLI, `dnSpy`/`ILSpy` CLI where available, jadx CLI, `python -m` for pip tools.
+- For repeat use, point the agent's skill directory at this repo's `SKILL.md` so it is loaded
+  automatically instead of being read per task.
+
 ## Working on this repo itself
 
 - Tool versions, assets, and hashes live in `manifest/tools.json`; the env scripts and both

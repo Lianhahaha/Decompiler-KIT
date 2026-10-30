@@ -530,7 +530,11 @@ is set (the env scripts do this), then uses the per-target command sequences abo
 - `AGENTS.md` (repo root) is the setup contract: an agent asked to "fetch this repo" installs
   everything by running the bootstrapper, verifies `tools/install.log`, activates `env`, and
   reports `GAME_RE_ROOT` — no manual downloads, no prompts.
-- Copy/reference `SKILL.md` in your agent's skills directory.
+- After install, usage is prompt-driven: give the agent the target path and the goal, e.g.
+  "decompile `C:\games\foo\foo.exe` with the kit" or "this is Unity IL2CPP — dump the classes
+  and hook `Player.Health`". The agent reads `SKILL.md` and picks Ghidra, RetDec, Il2CppDumper,
+  dnSpy/ILSpy, jadx, etc.
+- Copy/reference `SKILL.md` in your agent's skills directory so it loads automatically.
 - Companion skills worth installing:
   - `ghidra` (headless recipes + GhidraMCP) — see the SKILL's Ghidra sections.
   - `gba-matching-decomp` — https://github.com/FacundoMainere/gba-matching-decomp-skill
