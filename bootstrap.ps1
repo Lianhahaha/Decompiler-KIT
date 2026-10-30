@@ -72,6 +72,26 @@ foreach($t in $data.tools){
         }
         Log "  OK -> $dest"
       }
+      "direct" {
+        Log "== $($t.id) ($($t.name))"
+        $osKey = if($env:OS -eq "Windows_NT"){ "win32" }
+                 elseif(Test-Path Variable:\IsMacOS){ if($IsMacOS){ "darwin" } else { "linux" } }
+                 else { "linux" }
+        $p = if($t.platforms){ $t.platforms.$osKey } else { $null }
+        $dlUrl = if($p -and $p.url){ $p.url } else { $t.url }
+        $ex = if($p -and $p.extract){ $p.extract } else { $t.extract }
+        if(-not $dlUrl){ throw "no download url for platform '$osKey'" }
+        $f = Join-Path $Dl (Split-Path $dlUrl -Leaf)
+        Download $dlUrl $f
+        Verify $f $t.sha256
+        New-Item -ItemType Directory -Force -Path $dest | Out-Null
+        switch($ex){
+          "zip" { & tar.exe -xf $f -C $dest; if($LASTEXITCODE -ne 0){ throw "tar failed" } }
+          "7z"  { $7zr=Ensure7zr "7z"; & $7zr x -y "-o$dest" $f | Out-Null }
+          default { Copy-Item $f $dest -Force }
+        }
+        Log "  OK -> $dest (run the installer/archive from there)"
+      }
       "git" {
         Log "== $($t.id) (clone)"
         $opts = @("clone","--depth","1")

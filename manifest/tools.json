@@ -27,6 +27,18 @@
       "license": "Apache-2.0"
     },
     {
+      "id": "binaryninja",
+      "name": "Binary Ninja (Free)",
+      "kind": "direct",
+      "category": "01_Disassemblers",
+      "platforms": {
+        "win32": { "url": "https://cdn.binary.ninja/installers/binaryninja_free_win64.exe", "extract": "none" },
+        "darwin": { "url": "https://cdn.binary.ninja/installers/binaryninja_free_macosx.dmg", "extract": "none" },
+        "linux": { "url": "https://cdn.binary.ninja/installers/binaryninja_free_linux.zip", "extract": "zip" }
+      },
+      "license": "Proprietary (free non-commercial tier; no API/plugins)"
+    },
+    {
       "id": "rizin",
       "name": "Rizin",
       "kind": "release",

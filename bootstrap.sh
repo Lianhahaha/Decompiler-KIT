@@ -55,12 +55,15 @@ extract(){
 }
 
 python3 - "$MAN" <<'PY' |
-import json, sys
+import json, sys, platform
 d = json.load(open(sys.argv[1]))
+os_key = {"Windows": "win32", "Darwin": "darwin"}.get(platform.system(), "linux")
 for t in d["tools"]:
+    p = (t.get("platforms") or {}).get(os_key, {})
     row = [t.get("id",""), t.get("name",""), t.get("kind",""), t.get("category",""),
-           t.get("repo",""), t.get("tag",""), t.get("asset",""), t.get("extract",""),
-           t.get("sha256",""), t.get("url",""), str(t.get("submodules","")),
+           t.get("repo",""), t.get("tag",""), t.get("asset",""),
+           p.get("extract", t.get("extract","")), t.get("sha256",""),
+           p.get("url", t.get("url","")), str(t.get("submodules","")),
            " ".join(t.get("packages", []))]
     print("\t".join(row))
 PY
@@ -80,6 +83,14 @@ while IFS=$'\t' read -r id name kind category repo tag asset extract sha url sub
       sha256_ok "$f" "$sha" || { log "FAIL $id: sha256"; continue; }
       extract "$extract" "$f" "$dest" || { log "FAIL $id: extract"; continue; }
       log "  OK -> $dest"
+      ;;
+    direct)
+      log "== $id ($name)"
+      f="$DL/$(basename "$url")"
+      download "$url" "$f" || { log "FAIL $id: download"; continue; }
+      sha256_ok "$f" "$sha" || { log "FAIL $id: sha256"; continue; }
+      extract "${extract:-none}" "$f" "$dest" || { log "FAIL $id: extract"; continue; }
+      log "  OK -> $dest (run the installer/archive from there)"
       ;;
     git)
       log "== $id (clone)"
