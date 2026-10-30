@@ -9,7 +9,9 @@ function Winget($id){ winget install --id $id --accept-package-agreements --acce
 if(W "cheatengine"){ Write-Host "Cheat Engine: https://cheatengine.org/downloads.php  (decline ALL bundled extras during install)" }
 
 # IDA Free / Binary Ninja (account/paid)
-if(W "ida"){ Write-Host "IDA Free: https://hex-rays.com/ida-free  |  Binary Ninja: https://binary.ninja" }
+# Binary Ninja Free is downloaded by bootstrap.ps1 into 01_Disassemblers\binaryninja
+# (no account needed); only the paid tiers are manual.
+if(W "ida"){ Write-Host "IDA Free: https://hex-rays.com/ida-free  |  Binary Ninja paid: https://binary.ninja/purchase/" }
 
 # Graphics / asset ripping
 if(W "renderdoc"){ Winget "BaldurKarlsson.RenderDoc" }

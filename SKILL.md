@@ -1,6 +1,6 @@
 ---
 name: decompiler-kit
-description: Decompile, reverse engineer, recompile, and mod games with a self-installing local toolkit. Use for native PC game binaries, Unity/Unreal/.NET/Android games, Xbox/Xbox 360/N64/GBA recompilation or matching decompilation, asset extraction, archive unpacking, memory scanning, and runtime hooking. First run bootstrap (./bootstrap.sh or bootstrap.ps1) then activate env (source env.sh or . .\env.ps1). Covers Ghidra (+ GhidraMCP), rizin/Cutter, RetDec, x64dbg, dnSpy, ILSpy, jadx, apktool, dex2jar, JPEXS FFDec, capa, floss, PE-bear, ImHex, Detect It Easy, Frida, AssetRipper, UABEA, Il2CppDumper, BepInEx, MelonLoader, quickbms, xdelta3, flips, ReClass.NET, xboxrecomp, N64Recomp, XenonRecomp.
+description: Decompile, reverse engineer, recompile, and mod games with a self-installing local toolkit. Use for native PC game binaries, Unity/Unreal/.NET/Android games, Xbox/Xbox 360/N64/GBA recompilation or matching decompilation, asset extraction, archive unpacking, memory scanning, and runtime hooking. First run bootstrap (./bootstrap.sh or bootstrap.ps1) then activate env (source env.sh or . .\env.ps1). Covers Ghidra (+ GhidraMCP), Binary Ninja Free, rizin/Cutter, RetDec, x64dbg, dnSpy, ILSpy, jadx, apktool, dex2jar, JPEXS FFDec, capa, floss, PE-bear, ImHex, Detect It Easy, Frida, AssetRipper, UABEA, Il2CppDumper, BepInEx, MelonLoader, quickbms, xdelta3, flips, ReClass.NET, xboxrecomp, N64Recomp, XenonRecomp.
 metadata:
   version: "2"
 ---
@@ -43,7 +43,7 @@ hardcoded paths. Tools live at `<root>/<category>/<id>`, e.g. `<root>/01_Disasse
 
 | Category | Tools |
 | --- | --- |
-| `01_Disassemblers` | Ghidra, GhidraMCP, rizin, Cutter, Detect It Easy, PE-bear, capa, floss, ImHex, Dependencies, CyberChef, angr, Miasm, Diaphora, Triton |
+| `01_Disassemblers` | Ghidra, GhidraMCP, Binary Ninja (Free installer), rizin, Cutter, Detect It Easy, PE-bear, capa, floss, ImHex, Dependencies, CyberChef, angr, Miasm, Diaphora, Triton |
 | `02_Debuggers` | x64dbg, dnSpy, ScyllaHide, decomp2dbg |
 | `03_Source-Decompilers` | RetDec, jadx, apktool, dex2jar, JPEXS FFDec, ILSpy, Recaf, de4dot |
 | `04_Static-Recompilation` | xboxrecomp, N64Recomp, XenonRecomp, gba-matching-decomp-skill |

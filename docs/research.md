@@ -88,7 +88,9 @@ first — the GBA skill exists exactly for that.
 ### Paid / account-gated (not bundled)
 - **IDA Free** — https://hex-rays.com/ida-free — free for non-commercial; the best decompiler UI.
 - **IDA Pro** — commercial.
-- **Binary Ninja** — https://binary.ninja — commercial, great API.
+- **Binary Ninja** — https://binary.ninja — commercial, great API. The **Free** tier
+  (x86/x86_64/ARMv7/AArch64, non-commercial, no API/plugins) is now downloaded by the
+  bootstrap as a per-OS installer (`kind: direct`).
 - **Cheat Engine** — https://cheatengine.org — memory scanner; installer bundles adware,
   use the custom install and decline extras.
 - **Hopper** — macOS only.

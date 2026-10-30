@@ -15,6 +15,7 @@ release at install time. Each tool remains under its own license, listed below.
 | --- | --- | --- |
 | Ghidra | https://github.com/NationalSecurityAgency/ghidra | Apache-2.0 (some modules GPL-3.0) |
 | GhidraMCP | https://github.com/LaurieWired/GhidraMCP | Apache-2.0 |
+| Binary Ninja (Free) | https://binary.ninja/free/ | Proprietary (free non-commercial tier) |
 | Rizin | https://github.com/rizinorg/rizin | LGPL-3.0 |
 | Cutter | https://github.com/rizinorg/cutter | GPL-3.0 |
 | Detect It Easy | https://github.com/horsicq/Detect-It-Easy | MIT |
@@ -72,10 +73,12 @@ release at install time. Each tool remains under its own license, listed below.
 | Mitmproxy | https://github.com/mitmproxy/mitmproxy | MIT |
 | Objection | https://github.com/sensepost/objection | MIT |
 
+Binary Ninja Free is downloaded by the bootstrap as an **installer** (the free tier has no
+API/plugin access and is non-commercial). Paid Binary Ninja editions are not bundled.
+
 Tools in `scripts/install-extras.ps1` are not auto-bundled: Cheat Engine (freeware,
 installer bundles third-party offers — decline them), IDA Free (proprietary, free tier),
-Binary Ninja (proprietary, free tier requires account), Wireshark (GPL-2.0),
-Caido (proprietary, "Basic" tier requires account).
+Wireshark (GPL-2.0), Caido (proprietary, "Basic" tier requires account).
 
 (Licenses above are best-effort; confirm from each upstream repo's LICENSE before redistributing.)
 

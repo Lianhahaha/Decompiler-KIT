@@ -2,9 +2,10 @@
 
 A self-installing, reproducible toolkit for **decompiling, reverse-engineering, and
 statically recompiling binaries**, with an accompanying asset-pipeline and runtime tooling
-set. One command installs ~53 pinned tools (Ghidra, rizin/Cutter, RetDec, x64dbg, dnSpy,
-ILSpy, jadx, Frida, angr, xboxrecomp, N64Recomp, XenonRecomp, and more) from their official
-upstream releases, with per-tool SHA-256 verification and license attribution.
+set. One command installs ~54 tools (Ghidra, Binary Ninja Free, rizin/Cutter, RetDec, x64dbg,
+dnSpy, ILSpy, jadx, Frida, angr, xboxrecomp, N64Recomp, XenonRecomp, and more) from their
+official upstream releases, with per-tool SHA-256 verification where upstream pins allow it,
+plus license attribution.
 
 The repo itself is small (this is a bootstrap + manifest, no tool binaries). Everything is
 declared in a single machine-readable manifest and materialised locally on demand, so the
@@ -72,6 +73,7 @@ manifest/tools.json   ──►  bootstrap.{ps1,sh}  ──►  tools/<category>
         │ pins tag/asset/sha    │ kind: release → download + verify + extract
         │                       │ kind: git     → shallow clone (optionally --recurse-submodules)
         │                       │ kind: pip     → python -m pip install <packages>
+        │                       │ kind: direct  → per-OS vendor URL (e.g. Binary Ninja Free installer)
         │
         └──►  env.{ps1,sh}  ──►  resolves install dirs + adds them to PATH (+ GHIDRA_HOME)
 ```
@@ -132,6 +134,12 @@ Installs land in `./tools/<category>/<id>/`. The bootstrap is **idempotent**: it
 whose directory is already populated. Use `-Force` (PowerShell) or `--force` (bash) to
 reinstall/repair.
 
+Most tools are extracted ready to run. One exception: **Binary Ninja Free** is an installer
+(`kind: direct`), so the bootstrap downloads it to
+`tools/01_Disassemblers/binaryninja/` — run that `.exe`/`.dmg` once (on Linux the zip is
+extracted), and keep using the installed app. It is the free non-commercial tier (no
+API/plugins); paid editions are not bundled.
+
 ## Installing a subset / custom location
 
 ```bash
@@ -180,8 +188,8 @@ environment — invoke them via `python -m` or their entry-point scripts.
 
 ```
 decompiler-kit/
-├─ manifest/tools.json      # source of truth: 53 pinned tools, 7 categories
-├─ bootstrap.ps1 | .sh      # installers (release / git / pip kinds)
+├─ manifest/tools.json      # source of truth: 54 tools, 7 categories
+├─ bootstrap.ps1 | .sh      # installers (release / git / pip / direct kinds)
 ├─ env.ps1 | .sh            # session activation (PATH, GHIDRA_HOME, GAME_RE_ROOT)
 ├─ SKILL.md                 # AI-agent skill (per-target workflows)
 ├─ NOTICE.md                # per-tool licenses + upstream URLs
@@ -204,6 +212,7 @@ paths below show the category and tool id.
 | --- | --- |
 | **Ghidra** | NSA's decompiler suite; headless mode (`analyzeHeadless`) for automation, scriptable in Python/Java. |
 | **GhidraMCP** | MCP bridge so an agent can drive Ghidra (GUI or headless). |
+| **Binary Ninja (Free)** | Vector 35's decompiler UI with an integrated debugger and built-in MCP server. Free tier covers x86/x86_64/ARMv7/AArch64, non-commercial, no API/plugins. Installer is downloaded per OS; run it once. |
 | **rizin** | Fast CLI reverse-engineering framework (radare2 lineage); `-A` auto-analysis, xrefs, scripting. |
 | **Cutter** | GUI front-end for rizin. |
 | **Detect It Easy** | Compiler/packer detection (`diec.exe`) — identify UPX/Themida/VMProtect before wasting time. |
@@ -413,9 +422,10 @@ powershell -ExecutionPolicy Bypass -File .\scripts\install-extras.ps1           
 powershell -ExecutionPolicy Bypass -File .\scripts\install-extras.ps1 -Only wireshark
 ```
 
-Covers: Cheat Engine (decline bundled extras), IDA Free, Binary Ninja, RenderDoc, Ninja Ripper,
+Covers: Cheat Engine (decline bundled extras), IDA Free, RenderDoc, Ninja Ripper,
 Dolphin/PCSX2/Ryujinx/PPSSPP/melonDS/BizHawk, FModel, UAssetGUI, Sysinternals, Wireshark,
-Caido.
+Caido. Binary Ninja Free is handled by the bootstrap (see
+[Quick start](#quick-start)); only paid Binary Ninja editions are manual.
 
 **Telemetry hardening** — reduce outbound analytics from the installed tools:
 
@@ -435,7 +445,7 @@ Adding a tool is a data change. Edit `manifest/tools.json`, re-run the bootstrap
 | --- | --- | --- | --- |
 | `id` | all | yes | Directory name under `category/`. |
 | `name` | all | yes | Display name. |
-| `kind` | all | yes | `release` \| `git` \| `pip`. |
+| `kind` | all | yes | `release` \| `git` \| `pip` \| `direct`. |
 | `category` | all | yes | Top-level folder (e.g. `01_Disassemblers`). |
 | `license` | all | yes | License string (see `NOTICE.md`). |
 | `repo` | release | yes | `owner/name` on GitHub. |
@@ -446,6 +456,9 @@ Adding a tool is a data change. Edit `manifest/tools.json`, re-run the bootstrap
 | `url` | git | yes | Clone URL. |
 | `submodules` | git | optional | `true` to recurse submodules. |
 | `packages` | pip | yes | Array of pip package names. |
+| `url` | direct | yes* | Vendor download URL (*unless per-OS `platforms` given). |
+| `platforms` | direct | optional | `{ "win32": {url, extract}, "darwin": …, "linux": … }`. |
+| `extract` | direct | optional | Same values as `release`, per platform (default `none`). |
 
 **Release** (pinned GitHub asset):
 
@@ -480,6 +493,19 @@ Adding a tool is a data change. Edit `manifest/tools.json`, re-run the bootstrap
   "packages": ["mitmproxy"], "license": "MIT" }
 ```
 
+**Direct** (vendor installer, per OS):
+
+```json
+{ "id": "binaryninja", "name": "Binary Ninja (Free)", "kind": "direct",
+  "category": "01_Disassemblers",
+  "platforms": {
+    "win32": { "url": "https://cdn.binary.ninja/installers/binaryninja_free_win64.exe", "extract": "none" },
+    "darwin": { "url": "https://cdn.binary.ninja/installers/binaryninja_free_macosx.dmg", "extract": "none" },
+    "linux": { "url": "https://cdn.binary.ninja/installers/binaryninja_free_linux.zip", "extract": "zip" }
+  },
+  "license": "Proprietary (free non-commercial tier; no API/plugins)" }
+```
+
 ## Reproducibility and verification
 
 - Downloads are pinned by exact `tag` + `asset`.
@@ -488,6 +514,8 @@ Adding a tool is a data change. Edit `manifest/tools.json`, re-run the bootstrap
 - Install logs are written to `<root>/install.log` (gitignored).
 - `kind: git` tools are shallow clones; `kind: pip` resolves the latest matching wheel (pin via
   your own constraints if you need bit-for-bit reproducibility for those).
+- `kind: direct` uses the vendor's official unversioned installer URL (Binary Ninja Free), so
+  neither the version nor a sha256 is pinned — re-running fetches the current free build.
 
 ## As an AI-agent skill
 

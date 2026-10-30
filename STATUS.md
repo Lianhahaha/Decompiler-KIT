@@ -9,7 +9,7 @@ pinned in `manifest/tools.json`) into `tools/` at install time.
 
 | Category | Tools |
 | --- | --- |
-| `01_Disassemblers` | Ghidra, GhidraMCP, rizin, Cutter, Detect It Easy, PE-bear, capa, floss, ImHex, Dependencies, CyberChef, angr, Miasm, Diaphora, Triton |
+| `01_Disassemblers` | Ghidra, GhidraMCP, Binary Ninja (Free), rizin, Cutter, Detect It Easy, PE-bear, capa, floss, ImHex, Dependencies, CyberChef, angr, Miasm, Diaphora, Triton |
 | `02_Debuggers` | x64dbg, dnSpy, ScyllaHide, decomp2dbg |
 | `03_Source-Decompilers` | RetDec, jadx, apktool, dex2jar, JPEXS FFDec, ILSpy, Recaf, de4dot |
 | `04_Static-Recompilation` | xboxrecomp, N64Recomp (+RecompModTool), XenonRecomp, gba-matching-decomp-skill |
@@ -20,15 +20,18 @@ pinned in `manifest/tools.json`) into `tools/` at install time.
 Python libs (via pip): capstone, pefile, lief, keystone, unicorn, dnfile, frida,
 decomp2dbg, rzpipe, angr, androguard, miasm, mitmproxy, objection.
 
-`kind` is one of `release` (GitHub asset), `git` (clone), or `pip`. `git`/`pip` tools
-like Diaphora, Triton, and de4dot are fetched as source and may need a build step (see
-`docs/research.md`).
+`kind` is one of `release` (pinned GitHub asset), `git` (clone), `pip`, or `direct`
+(official upstream installer URL, resolved per OS). `git`/`pip` tools like Diaphora,
+Triton, and de4dot are fetched as source and may need a build step (see
+`docs/research.md`). `direct` tools such as Binary Ninja Free ship an installer, so the
+bootstrap downloads it but the user runs the installer (the free tier has no API/plugins;
+it is downloaded from `cdn.binary.ninja`, so no sha256 is pinned).
 
 ## Not auto-bundled (account-gated / adware / big)
 
 `scripts/install-extras.ps1` covers: Cheat Engine (adware installer — decline all
-extras), IDA Free, Binary Ninja, RenderDoc, Ninja Ripper, console emulators, FModel,
-UAssetGUI, Sysinternals, Wireshark, Caido (Basic).
+extras), IDA Free, RenderDoc, Ninja Ripper, console emulators, FModel, UAssetGUI,
+Sysinternals, Wireshark, Caido (Basic).
 
 ## Roadmap
 
