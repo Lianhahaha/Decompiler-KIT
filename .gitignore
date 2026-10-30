@@ -1,8 +1,8 @@
-# tools downloaded by bootstrap
-tools/
-_downloads/
-install.log
-MANIFEST.csv
+# tools downloaded by bootstrap (root only, so vendored nested dirs aren't skipped)
+/tools/
+/_downloads/
+/install.log
+/MANIFEST.csv
 *.pyc
 __pycache__/
 .DS_Store
@@ -10,5 +10,5 @@ __pycache__/
 # local analysis output (keep out of search + context)
 *.har
 *.log
-dumps/
-_decompiled/
+/dumps/
+/_decompiled/
