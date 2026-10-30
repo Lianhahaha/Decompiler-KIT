@@ -14,6 +14,12 @@ Designed to be used two ways:
 > No binaries are stored in this repo (GitHub has a 100 MB file limit and this is ~4.5 GB
 > installed). Tools are downloaded at install time from their official releases.
 
+> **Bundled tool:** `dissectdat/` is a vendored copy of
+> [REA — Reverse Engineer Anything](https://github.com/morluto/rea) (MIT, © morluto).
+> It ships as source so it is available immediately after cloning, while the other tools
+> download. It is **not** covered by this repo's MIT license — see `dissectdat/LICENSE`.
+> Run `cd dissectdat && npm install` to use it.
+
 ## Install
 
 ```bash
