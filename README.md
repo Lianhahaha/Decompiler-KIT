@@ -12,7 +12,7 @@ declared in a single machine-readable manifest and materialised locally on deman
 installed layout is deterministic and reproducible across machines.
 
 > No tool binaries are stored in this repository. `bootstrap.ps1` / `bootstrap.sh` download
-> each tool from its official upstream release at install time (the full install is ~4.5 GB).
+> each tool from its official upstream release at install time (the full install is ~5 GB).
 > Versions and hashes are pinned in `manifest/tools.json`.
 
 ---
@@ -112,7 +112,8 @@ finish downloading.
 | 7-Zip | `.7z` / `.rar` archives | `.7z` via bundled `7zr.exe`; `.rar` (ReClass.NET) needs installed 7-Zip. |
 | Node.js (24.x) | `dissectdat` | See `dissectdat/.nvmrc`. |
 
-Disk: ~4.5 GB for the full tool install, plus ~85 MB for the vendored `dissectdat` source.
+Disk: ~5 GB for the full tool install (Binary Ninja Free alone is a ~440 MB installer), plus
+~85 MB for the vendored `dissectdat` source.
 
 ## Quick start
 
