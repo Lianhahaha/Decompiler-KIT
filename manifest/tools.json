@@ -1,0 +1,607 @@
+{
+  "schema": 1,
+  "root": "tools",
+  "tools": [
+    {
+      "id": "ghidra",
+      "name": "Ghidra",
+      "kind": "release",
+      "category": "01_Disassemblers",
+      "repo": "NationalSecurityAgency/ghidra",
+      "tag": "Ghidra_12.2_build",
+      "asset": "ghidra_12.2_PUBLIC_20261016.zip",
+      "extract": "zip",
+      "sha256": "2c2cd776db3c1f6a097ba418922378ac3649cadd5e844a6f5f088ae628a7be67",
+      "license": "Apache-2.0"
+    },
+    {
+      "id": "ghidra-mcp",
+      "name": "GhidraMCP",
+      "kind": "release",
+      "category": "01_Disassemblers",
+      "repo": "LaurieWired/GhidraMCP",
+      "tag": "2.0",
+      "asset": "GhidraMCP-release-2-0.zip",
+      "extract": "zip",
+      "sha256": "ebf904fd6782e429e95a60a24fe0724b20c0acb2dedb304135a5281f6b5f2e72",
+      "license": "Apache-2.0"
+    },
+    {
+      "id": "rizin",
+      "name": "Rizin",
+      "kind": "release",
+      "category": "01_Disassemblers",
+      "repo": "rizinorg/rizin",
+      "tag": "v0.9.1",
+      "asset": "rizin-windows-static-v0.9.1.zip",
+      "extract": "zip",
+      "sha256": "2d14e0a6ecba1196dcd742d63de83bbaffed2a7a78ef5a0a9b4e92a0f73d1d28",
+      "license": "LGPL-3.0"
+    },
+    {
+      "id": "cutter",
+      "name": "Cutter",
+      "kind": "release",
+      "category": "01_Disassemblers",
+      "repo": "rizinorg/cutter",
+      "tag": "v2.5.0",
+      "asset": "Cutter-v2.5.0-Windows-x86_64.zip",
+      "extract": "zip",
+      "sha256": "a04154a03a392dbf5886a629938582f7d23a93636fa0611c3e1c34905b197e69",
+      "license": "GPL-3.0"
+    },
+    {
+      "id": "detect-it-easy",
+      "name": "Detect It Easy",
+      "kind": "release",
+      "category": "01_Disassemblers",
+      "repo": "horsicq/Detect-It-Easy",
+      "tag": "Beta",
+      "asset": "die_win64_portable_3.10_x64.zip",
+      "extract": "zip",
+      "sha256": "8eb0604244f029718f2bd6ab8a9fcf5f8eaf9f2e7ab4041fd02d2cce9bdaf7e8",
+      "license": "MIT"
+    },
+    {
+      "id": "pe-bear",
+      "name": "PE-bear",
+      "kind": "release",
+      "category": "01_Disassemblers",
+      "repo": "hasherezade/pe-bear",
+      "tag": "v0.7.2",
+      "asset": "PE-bear_0.7.2_qt6_x64_win_vs22.zip",
+      "extract": "zip",
+      "sha256": "d2b995b213d0e6b3910a863c12fdb842722ce47387e65fc8e711ee9013d0876e",
+      "license": "GPL-3.0"
+    },
+    {
+      "id": "capa",
+      "name": "capa",
+      "kind": "release",
+      "category": "01_Disassemblers",
+      "repo": "mandiant/capa",
+      "tag": "v10.0.0",
+      "asset": "capa-v10.0.0-windows.zip",
+      "extract": "zip",
+      "sha256": "8712991044321dbb2a5b0d60f7a5327a50c9c30a295e7ddb5c1088cb17fb59df",
+      "license": "Apache-2.0"
+    },
+    {
+      "id": "floss",
+      "name": "FLOSS",
+      "kind": "release",
+      "category": "01_Disassemblers",
+      "repo": "mandiant/flare-floss",
+      "tag": "v4.0.0-alpha.2",
+      "asset": "floss-v4.0.0-alpha.2-windows.zip",
+      "extract": "zip",
+      "sha256": "402fe5ed2074d15a6b8f5972dc004e9cfefb2e79d84047dea8aa901c44bd0fb9",
+      "license": "Apache-2.0"
+    },
+    {
+      "id": "imhex",
+      "name": "ImHex",
+      "kind": "release",
+      "category": "01_Disassemblers",
+      "repo": "WerWolv/ImHex",
+      "tag": "v1.38.1",
+      "asset": "imhex-1.38.1-Windows-Portable-x86_64.zip",
+      "extract": "zip",
+      "sha256": "32520e57712894bc8304c4b01553223e7dda25852326184f99dfd72a09a80187",
+      "license": "GPL-2.0"
+    },
+    {
+      "id": "x64dbg",
+      "name": "x64dbg",
+      "kind": "release",
+      "category": "02_Debuggers",
+      "repo": "x64dbg/x64dbg",
+      "tag": "2026.05.27",
+      "asset": "snapshot_2026-05-27_12-11.zip",
+      "extract": "zip",
+      "sha256": "d41966dfc5b435a372798245300ca0ab7bb8e48bdbf48512c6fb20fcca427697",
+      "license": "GPL-3.0"
+    },
+    {
+      "id": "dnspy",
+      "name": "dnSpy",
+      "kind": "release",
+      "category": "02_Debuggers",
+      "repo": "dnSpyEx/dnSpy",
+      "tag": "v6.6.0",
+      "asset": "dnSpy-net-win64.zip",
+      "extract": "zip",
+      "sha256": "8ed48f165dc355e869f3a0037ad4f9216147f995a5ae0258b296eeef1f73aab0",
+      "license": "GPL-3.0"
+    },
+    {
+      "id": "retdec",
+      "name": "RetDec",
+      "kind": "release",
+      "category": "03_Source-Decompilers",
+      "repo": "avast/retdec",
+      "tag": "v5.0",
+      "asset": "RetDec-v5.0-Windows-Release.7z",
+      "extract": "7z",
+      "sha256": "496a2d86420115eaa21ac8ff9b202282525f0a46a28a78c983f2cca0643ab101",
+      "license": "MIT"
+    },
+    {
+      "id": "jadx",
+      "name": "jadx",
+      "kind": "release",
+      "category": "03_Source-Decompilers",
+      "repo": "skylot/jadx",
+      "tag": "v1.5.6",
+      "asset": "jadx-gui-1.5.6-with-jre-win.zip",
+      "extract": "zip",
+      "sha256": "56a870460d03d3d6f22eb0908c33e298bc7370c952a6b7fa48c22a187ecd690b",
+      "license": "Apache-2.0"
+    },
+    {
+      "id": "apktool",
+      "name": "Apktool",
+      "kind": "release",
+      "category": "03_Source-Decompilers",
+      "repo": "iBotPeaches/Apktool",
+      "tag": "v3.0.3",
+      "asset": "apktool_3.0.3.jar",
+      "extract": "none",
+      "sha256": "dbf930b076c6b9be08d57c449cacefc3bdd6b71ebd59b3066fc0e1f5b14f9423",
+      "license": "Apache-2.0"
+    },
+    {
+      "id": "dex2jar",
+      "name": "dex2jar",
+      "kind": "release",
+      "category": "03_Source-Decompilers",
+      "repo": "pxb1988/dex2jar",
+      "tag": "v2.4",
+      "asset": "dex-tools-v2.4.zip",
+      "extract": "zip",
+      "sha256": "ee7c45eb3c1d2474a6145d8d447e651a736a22d9664b6d3d3be5a5a817dda23a",
+      "license": "Apache-2.0"
+    },
+    {
+      "id": "ffdec",
+      "name": "JPEXS FFDec",
+      "kind": "release",
+      "category": "03_Source-Decompilers",
+      "repo": "jindrapetrik/jpexs-decompiler",
+      "tag": "nightly3606",
+      "asset": "ffdec_26.4.0_nightly3606.zip",
+      "extract": "zip",
+      "sha256": "a8355050ba7861d73aa6d44453cd138859403a2eee6072695210f218ec46e191",
+      "license": "GPL-3.0"
+    },
+    {
+      "id": "ilspy",
+      "name": "ILSpy",
+      "kind": "release",
+      "category": "03_Source-Decompilers",
+      "repo": "icsharpcode/ILSpy",
+      "tag": "v11.2",
+      "asset": "ILSpy_windows_selfcontained_11.2.0.10050-x64.zip",
+      "extract": "zip",
+      "sha256": "c30cda0e5a22435df5013eeffa515594abf144e2d06c9bb5ddcc9fccdefd69c8",
+      "license": "MIT"
+    },
+    {
+      "id": "xboxrecomp",
+      "name": "xboxrecomp",
+      "kind": "git",
+      "category": "04_Static-Recompilation",
+      "url": "https://github.com/sp00nznet/xboxrecomp.git",
+      "license": "MIT"
+    },
+    {
+      "id": "n64recomp",
+      "name": "N64Recomp",
+      "kind": "git",
+      "category": "04_Static-Recompilation",
+      "url": "https://github.com/N64Recomp/N64Recomp.git",
+      "license": "MIT",
+      "submodules": true
+    },
+    {
+      "id": "xenonrecomp",
+      "name": "XenonRecomp",
+      "kind": "git",
+      "category": "04_Static-Recompilation",
+      "url": "https://github.com/hedge-dev/XenonRecomp.git",
+      "license": "MIT",
+      "submodules": true
+    },
+    {
+      "id": "gba-skill",
+      "name": "gba-matching-decomp-skill",
+      "kind": "git",
+      "category": "04_Static-Recompilation",
+      "url": "https://github.com/FacundoMainere/gba-matching-decomp-skill.git",
+      "license": "MIT"
+    },
+    {
+      "id": "n64modtool",
+      "name": "RecompModTool",
+      "kind": "release",
+      "category": "04_Static-Recompilation",
+      "repo": "N64Recomp/N64Recomp",
+      "tag": "mod-tool-release",
+      "asset": "RecompModTool.exe",
+      "extract": "none",
+      "sha256": "207cb1e1f87c99cc779a8f6dfa01475ee26f512be8faa8f649f854744a1bdec3",
+      "license": "MIT"
+    },
+    {
+      "id": "assetripper",
+      "name": "AssetRipper",
+      "kind": "release",
+      "category": "05_Game-Mods-and-Assets",
+      "repo": "AssetRipper/AssetRipper",
+      "tag": "2.0.0",
+      "asset": "AssetRipper_win_x64.zip",
+      "extract": "zip",
+      "sha256": "9a7ef0e7c5c3ea5b90b4e6d855e2d98d5f7ec8c3f9e26fccbc194c6a7b01baf7",
+      "license": "GPL-3.0"
+    },
+    {
+      "id": "uabea",
+      "name": "UABEA",
+      "kind": "release",
+      "category": "05_Game-Mods-and-Assets",
+      "repo": "nesrak1/UABEA",
+      "tag": "v8",
+      "asset": "uabea-windows.zip",
+      "extract": "zip",
+      "sha256": "0623ab1dc099a6397c3a7e72782b91405e60b286c6825fb6fa21e553ff2ea580",
+      "license": "MIT"
+    },
+    {
+      "id": "il2cppdumper",
+      "name": "Il2CppDumper",
+      "kind": "release",
+      "category": "05_Game-Mods-and-Assets",
+      "repo": "Perfare/Il2CppDumper",
+      "tag": "v6.7.46",
+      "asset": "Il2CppDumper-win-v6.7.46.zip",
+      "extract": "zip",
+      "sha256": "f5fc60dfc5c034c1ff3fc651514416ebd47658a63493207734537fd25fa2dea2",
+      "license": "MIT"
+    },
+    {
+      "id": "bepinex",
+      "name": "BepInEx",
+      "kind": "release",
+      "category": "05_Game-Mods-and-Assets",
+      "repo": "BepInEx/BepInEx",
+      "tag": "v5.4.23.6",
+      "asset": "BepInEx_win_x64_5.4.23.6.zip",
+      "extract": "zip",
+      "sha256": "6c57a714a892efb4e9e1fef63d608a3391f30ec984031c465404e4ee381a0755",
+      "license": "LGPL-2.1"
+    },
+    {
+      "id": "melonloader",
+      "name": "MelonLoader",
+      "kind": "release",
+      "category": "05_Game-Mods-and-Assets",
+      "repo": "LavaGang/MelonLoader",
+      "tag": "v0.7.3",
+      "asset": "MelonLoader.x64.zip",
+      "extract": "zip",
+      "sha256": "5b2b2f3d1cd42b59ec886c5bdc2663edae87a0097a4f4a8f58c0965a99dda416",
+      "license": "Apache-2.0"
+    },
+    {
+      "id": "quickbms",
+      "name": "QuickBMS",
+      "kind": "release",
+      "category": "05_Game-Mods-and-Assets",
+      "repo": "LittleBigBug/QuickBMS",
+      "tag": "0.12.0",
+      "asset": "quickbms_win.zip",
+      "extract": "zip",
+      "sha256": "b9d4f9efb55692994cd42a491cfea11f86e3375a618b9bd771583ce40ddb3828",
+      "license": "GPL-2.0"
+    },
+    {
+      "id": "xdelta3",
+      "name": "xdelta3",
+      "kind": "release",
+      "category": "05_Game-Mods-and-Assets",
+      "repo": "jmacd/xdelta-gpl",
+      "tag": "v3.1.0",
+      "asset": "xdelta3-3.1.0-x86_64.exe.zip",
+      "extract": "zip",
+      "sha256": "b10e0d1df3e212e5a2d37d5c088d2f72ecec760bc3c26caeca51499c3118b93a",
+      "license": "GPL-2.0"
+    },
+    {
+      "id": "flips",
+      "name": "flips",
+      "kind": "release",
+      "category": "05_Game-Mods-and-Assets",
+      "repo": "Alcaro/flips",
+      "tag": "v198",
+      "asset": "flips-windows.zip",
+      "extract": "zip",
+      "sha256": "802bfb315dca08a2f765dd6864472ecbb2b482681045c573d5e4b657b8e5295d",
+      "license": "GPL-3.0"
+    },
+    {
+      "id": "xdvdfs",
+      "name": "xdvdfs",
+      "kind": "release",
+      "category": "05_Game-Mods-and-Assets",
+      "repo": "antangelo/xdvdfs",
+      "tag": "v0.8.3",
+      "asset": "xdvdfs-windows-1cc850bf1b3487fad7ec7c9eed01d83e8fc75ba4.zip",
+      "extract": "zip",
+      "sha256": "008b1b3a63f1ecb00d1ed51ab154053fd0f7c41c68e973455bbe77ab989a7cc5",
+      "license": "MIT"
+    },
+    {
+      "id": "extract-xiso",
+      "name": "extract-xiso",
+      "kind": "release",
+      "category": "05_Game-Mods-and-Assets",
+      "repo": "XboxDev/extract-xiso",
+      "tag": "build-202609111233",
+      "asset": "extract-xiso-Win64_Release.zip",
+      "extract": "zip",
+      "sha256": "fc891dfa72f08e3838a2f8b7ec34a8e4d61678da1cc8fee879677f00bf114ce3",
+      "license": "GPL-3.0"
+    },
+    {
+      "id": "reclass",
+      "name": "ReClass.NET",
+      "kind": "release",
+      "category": "06_Memory-and-Instrumentation",
+      "repo": "ReClassNET/ReClass.NET",
+      "tag": "v1.2",
+      "asset": "ReClass.NET.rar",
+      "extract": "rar",
+      "sha256": "3822bf8974df152cae17714ee484fdcc3ede5c1e26bc159c7c9e9e62e60b9f46",
+      "license": "MIT"
+    },
+    {
+      "id": "frida",
+      "name": "Frida",
+      "kind": "pip",
+      "category": "06_Memory-and-Instrumentation",
+      "packages": [
+        "frida",
+        "frida-tools"
+      ],
+      "license": "wxWindows"
+    },
+    {
+      "id": "decomp2dbg",
+      "name": "decomp2dbg",
+      "kind": "pip",
+      "category": "02_Debuggers",
+      "packages": [
+        "decomp2dbg"
+      ],
+      "license": "BSD-2-Clause"
+    },
+    {
+      "id": "py-libs",
+      "name": "pefile/lief/keystone/unicorn/dnfile",
+      "kind": "pip",
+      "category": "01_Disassemblers",
+      "packages": [
+        "capstone",
+        "pefile",
+        "lief",
+        "keystone-engine",
+        "unicorn",
+        "dnfile"
+      ],
+      "license": "mixed (see NOTICE)"
+    },
+    {
+      "id": "systeminformer",
+      "name": "SystemInformer",
+      "kind": "release",
+      "category": "06_Memory-and-Instrumentation",
+      "repo": "winsiderss/systeminformer",
+      "tag": "v4.0.26241.138",
+      "asset": "systeminformer-4.0.26241.138-bin.zip",
+      "extract": "zip",
+      "sha256": "3e12cc4f1ffa1cc34ab9202a9dfe410724cb8b68aaf2efa43c01d3705b27219e",
+      "license": "MIT (see repo)"
+    },
+    {
+      "id": "dependencies",
+      "name": "Dependencies",
+      "kind": "release",
+      "category": "01_Disassemblers",
+      "repo": "lucasg/Dependencies",
+      "tag": "v1.11.1",
+      "asset": "Dependencies_x64_Release.zip",
+      "extract": "zip",
+      "sha256": "7d22dc00f1c09fd4415d48ad74d1cf801893e83b9a39944b0fce6dea7ceaea99",
+      "license": "MIT"
+    },
+    {
+      "id": "scyllahide",
+      "name": "ScyllaHide",
+      "kind": "release",
+      "category": "02_Debuggers",
+      "repo": "x64dbg/ScyllaHide",
+      "tag": "v1.4",
+      "asset": "ScyllaHide_2023-03-24_13-03.zip",
+      "extract": "zip",
+      "sha256": "edeb0dd203fd1ef38e1404e8a1bd001e05c50b6096e49533f546d13ffdcb7404",
+      "license": "GPL-3.0"
+    },
+    {
+      "id": "squalr",
+      "name": "Squalr",
+      "kind": "release",
+      "category": "06_Memory-and-Instrumentation",
+      "repo": "Squalr/Squalr",
+      "tag": "v0.4.0",
+      "asset": "squalr-0.4.0-windows-x86_64.zip",
+      "extract": "zip",
+      "sha256": "c6092c3ee2518023aee446b97e1adb87676bff8279f7e068ff2404bc78494509",
+      "license": "GPL-3.0 (see repo)"
+    },
+    {
+      "id": "recaf",
+      "name": "Recaf",
+      "kind": "release",
+      "category": "03_Source-Decompilers",
+      "repo": "Col-E/Recaf",
+      "tag": "4.0.0-alpha",
+      "asset": "recaf-4x-alpha-win-86-x64.jar",
+      "extract": "none",
+      "sha256": "d84f35c8d681d84a6c085e1aea7a4fe4e14d7046eecae9a2b3a07c7d6eee1aec",
+      "license": "MIT"
+    },
+    {
+      "id": "armips",
+      "name": "armips",
+      "kind": "release",
+      "category": "05_Game-Mods-and-Assets",
+      "repo": "Kingcom/armips",
+      "tag": "v0.11.0",
+      "asset": "armips-v0.11.0-windows-x86.7z",
+      "extract": "7z",
+      "sha256": "ead4c8282867255c9e47cd8855383422d82e31908721405a5b7191b95125262b",
+      "license": "MIT"
+    },
+    {
+      "id": "asar",
+      "name": "asar",
+      "kind": "release",
+      "category": "05_Game-Mods-and-Assets",
+      "repo": "RPGHacker/asar",
+      "tag": "v1.91",
+      "asset": "asar191.zip",
+      "extract": "zip",
+      "sha256": "5d40f9cfa574360d8a3f382583556ba8757435274b35207977bf1cf20397b1e7",
+      "license": "MIT (see repo)"
+    },
+    {
+      "id": "cyberchef",
+      "name": "CyberChef",
+      "kind": "release",
+      "category": "01_Disassemblers",
+      "repo": "gchq/CyberChef",
+      "tag": "v11.5.0",
+      "asset": "CyberChef_8cd426dd4f40f1423912d5fad91b578a86a65112.zip",
+      "extract": "zip",
+      "sha256": "f6478925d3eaa16ec08626a85f5b85eed10d531a5e18700615fed7ecb024cccf",
+      "license": "Apache-2.0"
+    },
+    {
+      "id": "crowbar",
+      "name": "Crowbar",
+      "kind": "release",
+      "category": "05_Game-Mods-and-Assets",
+      "repo": "ZeqMacaw/Crowbar",
+      "tag": "v0.74",
+      "asset": "Crowbar_2023-02-16_0.74.7z",
+      "extract": "7z",
+      "sha256": "a33d16ea4894ec01686e53d01c6a2b8f816f4abdaead7ece41262e03ffa9c13f",
+      "license": "MIT (see repo)"
+    },
+    {
+      "id": "rzpipe",
+      "name": "rzpipe",
+      "kind": "pip",
+      "category": "01_Disassemblers",
+      "packages": [
+        "rzpipe"
+      ],
+      "license": "MIT"
+    },
+    {
+      "id": "angr-androguard",
+      "name": "angr + androguard",
+      "kind": "pip",
+      "category": "01_Disassemblers",
+      "packages": [
+        "angr",
+        "androguard"
+      ],
+      "license": "BSD-2-Clause / Apache-2.0"
+    },
+    {
+      "id": "miasm",
+      "name": "Miasm",
+      "kind": "pip",
+      "category": "01_Disassemblers",
+      "packages": [
+        "miasm"
+      ],
+      "license": "GPL-2.0"
+    },
+    {
+      "id": "diaphora",
+      "name": "Diaphora",
+      "kind": "git",
+      "category": "01_Disassemblers",
+      "url": "https://github.com/joxeankoret/diaphora.git",
+      "license": "Apache-2.0"
+    },
+    {
+      "id": "triton",
+      "name": "Triton",
+      "kind": "git",
+      "category": "01_Disassemblers",
+      "url": "https://github.com/JonathanSalwan/Triton.git",
+      "license": "Apache-2.0"
+    },
+    {
+      "id": "de4dot",
+      "name": "de4dot",
+      "kind": "git",
+      "category": "03_Source-Decompilers",
+      "url": "https://github.com/0xd4d/de4dot.git",
+      "license": "GPL-3.0"
+    },
+    {
+      "id": "mitmproxy",
+      "name": "Mitmproxy",
+      "kind": "pip",
+      "category": "07_Network-and-APIs",
+      "packages": [
+        "mitmproxy"
+      ],
+      "license": "MIT"
+    },
+    {
+      "id": "objection",
+      "name": "Objection",
+      "kind": "pip",
+      "category": "07_Network-and-APIs",
+      "packages": [
+        "objection"
+      ],
+      "license": "MIT"
+    }
+  ]
+}
