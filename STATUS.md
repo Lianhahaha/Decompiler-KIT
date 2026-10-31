@@ -9,16 +9,16 @@ pinned in `manifest/tools.json`) into `tools/` at install time.
 
 | Category | Tools |
 | --- | --- |
-| `01_Disassemblers` | Ghidra, GhidraMCP, Binary Ninja (Free), rizin, Cutter, Detect It Easy, PE-bear, capa, floss, ImHex, Dependencies, CyberChef, angr, Miasm, Diaphora, Triton |
+| `01_Disassemblers` | Ghidra, GhidraMCP, Binary Ninja (Free), rizin, Cutter, Detect It Easy, PE-bear, capa, floss, ImHex, UPX, Dependencies, CyberChef, angr, Diaphora, Triton |
 | `02_Debuggers` | x64dbg, dnSpy, ScyllaHide, decomp2dbg |
-| `03_Source-Decompilers` | RetDec, jadx, apktool, dex2jar, JPEXS FFDec, ILSpy, Recaf, de4dot |
+| `03_Source-Decompilers` | RetDec, jadx, apktool, JPEXS FFDec, ILSpy, Recaf, de4dot |
 | `04_Static-Recompilation` | xboxrecomp, N64Recomp (+RecompModTool), XenonRecomp, gba-matching-decomp-skill |
-| `05_Game-Mods-and-Assets` | AssetRipper, UABEA, Il2CppDumper, BepInEx, MelonLoader, quickbms, xdelta3, flips, armips, asar, xdvdfs, extract-xiso, Crowbar |
+| `05_Game-Mods-and-Assets` | AssetRipper, UABEA, Il2CppDumper, Cpp2IL, BepInEx, MelonLoader, FModel, UAssetGUI, UE4SS, repak, GDRE Tools, UndertaleModTool, vgmstream, quickbms, xdelta3, flips, armips, asar, xdvdfs, Crowbar |
 | `06_Memory-and-Instrumentation` | Frida, ReClass.NET, SystemInformer, Squalr |
 | `07_Network-and-APIs` | Mitmproxy, Objection |
 
 Python libs (via pip): capstone, pefile, lief, keystone, unicorn, dnfile, frida,
-decomp2dbg, rzpipe, angr, androguard, miasm, mitmproxy, objection.
+decomp2dbg, rzpipe, angr, androguard, mitmproxy, objection.
 
 `kind` is one of `release` (pinned GitHub asset), `git` (clone), `pip`, or `direct`
 (official upstream installer URL, resolved per OS). `git`/`pip` tools like Diaphora,
@@ -30,8 +30,8 @@ it is downloaded from `cdn.binary.ninja`, so no sha256 is pinned).
 ## Not auto-bundled (account-gated / adware / big)
 
 `scripts/install-extras.ps1` covers: Cheat Engine (adware installer — decline all
-extras), IDA Free, RenderDoc, Ninja Ripper, console emulators, FModel, UAssetGUI,
-Sysinternals, Wireshark, Caido (Basic).
+extras), IDA Free, RenderDoc, Ninja Ripper, console emulators, Sysinternals,
+Wireshark, Caido (Basic).
 
 ## Roadmap
 

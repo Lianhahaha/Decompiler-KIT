@@ -2,7 +2,7 @@
 
 A self-installing, reproducible toolkit for **decompiling, reverse-engineering, and
 statically recompiling binaries**, with an accompanying asset-pipeline and runtime tooling
-set. One command installs ~54 tools (Ghidra, Binary Ninja Free, rizin/Cutter, RetDec, x64dbg,
+set. One command installs ~60 tools (Ghidra, Binary Ninja Free, rizin/Cutter, RetDec, x64dbg,
 dnSpy, ILSpy, jadx, Frida, angr, xboxrecomp, N64Recomp, XenonRecomp, and more) from their
 official upstream releases, with per-tool SHA-256 verification where upstream pins allow it,
 plus license attribution.
@@ -181,18 +181,18 @@ What it does:
   nothing runnable).
 - Adds `bin/`, `support/`, `x64/`, `x86/`, `artifacts/` subdirectories where present.
 - Resolves **versioned** install dirs (Ghidra ships inside `ghidra_12.2_PUBLIC/`, rizin inside
-  `rizin-win-installer-*/`, Cutter under `Cutter-v2.5.0-*/`, dex2jar under `dex-tools-v2.4/`).
+  `rizin-win-installer-*/`, Cutter under `Cutter-v2.5.0-*/`).
 - Exports `GHIDRA_HOME` and `GHIDRA_INSTALL_DIR` for Ghidra/GhidraMCP.
 - Exports `GAME_RE_ROOT` so scripts and the agent skill agree on the root.
 
-Pip-installed tools (Frida, angr, miasm, …) are not on `PATH`; they live in your Python
+Pip-installed tools (Frida, angr, …) are not on `PATH`; they live in your Python
 environment — invoke them via `python -m` or their entry-point scripts.
 
 ## Repository layout
 
 ```
 decompiler-kit/
-├─ manifest/tools.json      # source of truth: 54 tools, 7 categories
+├─ manifest/tools.json      # source of truth: 60 tools, 7 categories
 ├─ bootstrap.ps1 | .sh      # installers (release / git / pip / direct kinds)
 ├─ env.ps1 | .sh            # session activation (PATH, GHIDRA_HOME, GAME_RE_ROOT)
 ├─ AGENTS.md                # AI-agent setup instructions (auto-install this kit)
@@ -225,10 +225,10 @@ paths below show the category and tool id.
 | **capa** | Detects capabilities (crypto, injection, anti-VM) from disassembly. |
 | **FLOSS** | Extracts obfuscated/stack strings from binaries. |
 | **ImHex** | Hex editor with a pattern language — ideal for reversing custom asset formats. |
+| **UPX** | Unpack UPX-compressed binaries (`upx -d`) before analysis. |
 | **Dependencies** | Recursive DLL import/dependency walker (GUI + CLI). |
 | **CyberChef** | Data transforms (decode/decrypt/parse) in a single offline HTML app. |
 | **angr + androguard** | Symbolic execution / binary analysis; Android APK analysis. |
-| **Miasm** | Python RE framework: IR, symbolic execution, emulation. |
 | **Diaphora** | Binary diffing (patch analysis / version diffing). Plugin for IDA Pro / Ghidra. |
 | **Triton** | Dynamic binary analysis + symbolic execution / taint tracking (built from source). |
 
@@ -248,7 +248,6 @@ paths below show the category and tool id.
 | **RetDec** | One-command binary → C for PE/ELF/Mach-O. |
 | **jadx** | Android DEX → Java (GUI + CLI). |
 | **Apktool** | APK decode/rebuild (manifest, resources, smali). |
-| **dex2jar** | DEX → JAR (feed to JD-GUI/CFR/Recaf). |
 | **JPEXS FFDec** | Flash/SWF decompiler + editor. |
 | **ILSpy** | Clean .NET C# decompiler (readable output). |
 | **Recaf** | Java bytecode editor/analyzer. |
@@ -270,16 +269,23 @@ paths below show the category and tool id.
 | **AssetRipper** | Unity assets → Unity project. |
 | **UABEA** | Unity asset/bundle editor. |
 | **Il2CppDumper** | Recover types/methods/structs from IL2CPP `GameAssembly.dll` + `global-metadata.dat`. |
+| **Cpp2IL** | Modern IL2CPP → C#/DLL recovery; fallback when Il2CppDumper struggles with newer Unity. |
 | **BepInEx** | Unity Mono + IL2CPP mod loader. |
 | **MelonLoader** | Unity mod loader (IL2CPP-first). |
+| **FModel** | Unreal Engine asset browser/exporter (`.pak`, `.uasset`, `.umap`). |
+| **UAssetGUI** | Edit Unreal `.uasset` files with a GUI. |
+| **UE4SS** | Unreal Engine 4/5 scripting system: Lua/C++ mods, blueprint dumps, live property editing. |
+| **repak** | Unreal `.pak` packer/unpacker (CLI). |
+| **GDRE Tools** | Godot `.pck` extractor + project decompiler (GDScript/C#). |
+| **UndertaleModTool** | GameMaker (`data.win`) unpacker/decompiler/repacker: code, assets, and mods. |
 | **quickbms** | Generic archive extractor (thousands of community scripts). |
 | **xdelta3** | Binary diff/patch (the standard for ROM-hack patches). |
 | **flips** | IPS/BPS patcher. |
 | **armips** | Assembler for patching console binaries. |
 | **asar** | SNES ROM assembler/patch tool. |
 | **xdvdfs** | Modern Xbox ISO tool (extract/build). |
-| **extract-xiso** | Classic Xbox ISO extractor. |
 | **Crowbar** | Source-engine asset (VPK/MDL) extractor/compiler. |
+| **vgmstream** | Game audio decoder/player (`.wem`, `.adx`, `.hca`, `.fsb`, many more). |
 
 ### `06_Memory-and-Instrumentation` — live process work
 
@@ -313,7 +319,7 @@ Installed via `pip` by the `py-libs` manifest entry (and a few standalone entrie
 - `keystone-engine` — assembler
 - `unicorn` — CPU emulator
 - `dnfile` — .NET metadata parsing
-- plus `frida`, `decomp2dbg`, `rzpipe`, `angr`, `androguard`, `miasm`, `mitmproxy`, `objection`
+- plus `frida`, `decomp2dbg`, `rzpipe`, `angr`, `androguard`, `mitmproxy`, `objection`
 
 ## Triage in 30 seconds
 
@@ -337,12 +343,15 @@ rizin -q -c "iI; ii; iS" target.exe
 | --- | --- |
 | `UnityPlayer.dll`, `GameAssembly.dll`, `*_Data/` | Unity (Mono or IL2CPP) |
 | `Managed/Assembly-CSharp.dll` | Unity Mono → dnSpy / BepInEx |
-| `global-metadata.dat` + `GameAssembly.dll` | Unity IL2CPP → Il2CppDumper + MelonLoader |
-| `.pak` + `Engine/` | Unreal → FModel / UAssetGUI |
+| `global-metadata.dat` + `GameAssembly.dll` | Unity IL2CPP → Cpp2IL / Il2CppDumper + MelonLoader |
+| `.pak` + `Engine/` | Unreal → FModel / UAssetGUI / UE4SS |
+| `.pck` + `project.godot` | Godot → GDRE Tools |
+| `data.win` / `game.win` | GameMaker → UndertaleModTool |
 | `default.xbe` | Original Xbox → xboxrecomp + xdvdfs |
 | `default.xex` | Xbox 360 → XenonRecomp |
 | `.gba` | GBA → gba-matching-decomp skill |
-| `.apk` | jadx + apktool + dex2jar |
+| `.apk` | jadx + apktool |
+| `UPX0`/`UPX1` sections | UPX → `upx -d` first |
 
 ## Workflows
 
@@ -361,6 +370,9 @@ $g = (Get-ChildItem "$GAME_RE_ROOT\01_Disassemblers\ghidra" -Directory | Sort Na
 
 # Binary → C in one step
 & "$GAME_RE_ROOT\03_Source-Decompilers\retdec\bin\retdec-decompiler.exe" --cleanup -o target.c target.exe
+
+# Unpack a UPX-packed binary first
+& "$GAME_RE_ROOT\01_Disassemblers\upx\upx-5.3.0-win64\upx.exe" -d target.exe
 ```
 
 ### Native binary — runtime confirmation
@@ -380,7 +392,30 @@ python -m ghidra_mcp --headless --binary target.exe --save
 ```powershell
 & "$GAME_RE_ROOT\02_Debuggers\dnspy\dnSpy.exe" "Game\Managed\Assembly-CSharp.dll"
 & "$GAME_RE_ROOT\03_Source-Decompilers\ilspy\ILSpy.exe"   # alternative, cleaner C#
-# IL2CPP: Il2CppDumper.exe <GameAssembly.dll> <global-metadata.dat> <out>
+# IL2CPP (try Cpp2IL first on recent Unity; Il2CppDumper is the classic fallback)
+& "$GAME_RE_ROOT\05_Game-Mods-and-Assets\cpp2il\Cpp2IL-2022.0.7-Windows.exe" --game-path "Game" --output "cpp2il-out"
+& "$GAME_RE_ROOT\05_Game-Mods-and-Assets\il2cppdumper\Il2CppDumper.exe" "Game\GameAssembly.dll" "Game\global-metadata.dat" "dump-out"
+```
+
+### Unreal Engine
+
+```powershell
+& "$GAME_RE_ROOT\05_Game-Mods-and-Assets\fmodel\FModel.exe"          # browse/export .pak + .uasset
+& "$GAME_RE_ROOT\05_Game-Mods-and-Assets\uassetgui\UAssetGUI.exe"     # edit a .uasset
+& "$GAME_RE_ROOT\05_Game-Mods-and-Assets\repak\repak.exe" --help      # pack/unpack .pak
+# Install UE4SS into the game's Binaries\Win64 folder (Lua/C++ mods, live object dumps)
+```
+
+### Godot
+
+```powershell
+& "$GAME_RE_ROOT\05_Game-Mods-and-Assets\gdre-tools\gdre_tools.exe"   # recover .pck + decompile GDScript
+```
+
+### GameMaker
+
+```powershell
+& "$GAME_RE_ROOT\05_Game-Mods-and-Assets\undertalemodtool\UndertaleModTool.exe"   # open data.win
 ```
 
 ### Android
@@ -406,6 +441,7 @@ py -3 -m tools.recomp      gf\default.xbe --all --split 250 --gen-dir ..\mygame\
 
 ```powershell
 & "$GAME_RE_ROOT\05_Game-Mods-and-Assets\assetripper\AssetRipper.GUI.Free.exe"
+& "$GAME_RE_ROOT\05_Game-Mods-and-Assets\vgmstream\vgmstream-cli.exe" -o out.wav "sound.wem"
 & "$GAME_RE_ROOT\05_Game-Mods-and-Assets\xdelta3\xdelta3-3.1.0-x86_64.exe" -d -s base.rom patch.xdelta out.rom
 & "$GAME_RE_ROOT\05_Game-Mods-and-Assets\flips\flips.exe"
 ```
@@ -428,9 +464,9 @@ powershell -ExecutionPolicy Bypass -File .\scripts\install-extras.ps1 -Only wire
 ```
 
 Covers: Cheat Engine (decline bundled extras), IDA Free, RenderDoc, Ninja Ripper,
-Dolphin/PCSX2/Ryujinx/PPSSPP/melonDS/BizHawk, FModel, UAssetGUI, Sysinternals, Wireshark,
-Caido. Binary Ninja Free is handled by the bootstrap (see
-[Quick start](#quick-start)); only paid Binary Ninja editions are manual.
+Dolphin/PCSX2/Ryujinx/PPSSPP/melonDS/BizHawk, Sysinternals, Wireshark, Caido.
+Binary Ninja Free is handled by the bootstrap (see [Quick start](#quick-start)); only paid
+Binary Ninja editions are manual.
 
 **Telemetry hardening** — reduce outbound analytics from the installed tools:
 
@@ -548,7 +584,7 @@ is set (the env scripts do this), then uses the per-target command sequences abo
 | `.rar` (ReClass.NET) not extracted | Install 7-Zip (`winget install 7zip.7zip`), then re-run bootstrap. |
 | `angr`/`androguard` pip fails | Often the newest Python (e.g. 3.14); use a 3.11–3.12 venv. Best-effort entry — a failure here doesn't block the rest. |
 | Tool "not found" after install | Re-run env activation (`. .\env.ps1` / `source ./env.sh`); make sure `GAME_RE_ROOT` matches the install root. |
-| Path seems wrong | Versioned tools (Ghidra/rizin/Cutter/dex2jar) resolve the inner folder automatically — don't hardcode the version dir. |
+| Path seems wrong | Versioned tools (Ghidra/rizin/Cutter) resolve the inner folder automatically — don't hardcode the version dir. |
 | Windows path case | On case-sensitive systems, use the manifest `id` verbatim (e.g. `detect-it-easy`, not `DetectItEasy`). |
 | Reinstall one tool | `-Force -Only <id>` (PowerShell) or `--force` with `ONLY=<id>` (bash). |
 

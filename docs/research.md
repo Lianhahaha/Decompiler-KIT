@@ -25,6 +25,7 @@ first — the GBA skill exists exactly for that.
 - **RetDec** — https://github.com/avast/retdec — one-command binary → C, supports PE/ELF/Mach-O.
 - **Detect It Easy** — https://github.com/horsicq/Detect-It-Easy — packer/compiler detection;
   tells you if the binary is Themida/VMProtect/UPX before you waste time.
+- **UPX** — https://github.com/upx/upx — unpacks UPX-compressed binaries (`upx -d`) before analysis.
 - **ImHex** — https://github.com/WerWolv/ImHex — hex editor with a pattern language, good
   for reverse-engineering custom asset formats.
 
@@ -60,18 +61,23 @@ first — the GBA skill exists exactly for that.
 - **MelonLoader** — https://github.com/LavaGang/MelonLoader — Unity mod loader, IL2CPP first.
 - **Harmony** — https://github.com/pardeike/Harmony — runtime method patching for .NET (used by both).
 - **Il2CppDumper** — https://github.com/Perfare/Il2CppDumper — recover types/methods from IL2CPP.
+- **Cpp2IL** — https://github.com/SamboyCoding/Cpp2IL — actively maintained IL2CPP → C#/DLL recovery; better on newer Unity.
 - **Il2CppInterop** — https://github.com/BepInEx/Il2CppInterop — managed bridge for IL2CPP.
 - **UABEA** — https://github.com/nesrak1/UABEA — Unity asset bundle editor.
 - **AssetRipper** — https://github.com/AssetRipper/AssetRipper — Unity assets → Unity project.
-- **FModel** — https://github.com/FModel-Tools/FModel — Unreal Engine asset explorer/exporter.
+- **FModel** — https://github.com/4sval/FModel — Unreal Engine asset explorer/exporter.
 - **UAssetGUI** — https://github.com/atenfyr/UAssetGUI — edit UE `.uasset` files.
+- **UE4SS** — https://github.com/UE4SS-RE/RE-UE4SS — UE4/5 Lua/C++ scripting, blueprint dumps, live property editing.
+- **repak** — https://github.com/trumank/repak — Unreal `.pak` packer/unpacker.
+- **GDRE Tools** — https://github.com/GDRETools/gdsdecomp — Godot `.pck` extraction + project decompilation.
+- **UndertaleModTool** — https://github.com/UnderminersTeam/UndertaleModTool — GameMaker `data.win` unpack, GML decompile, asset edit, repack.
+- **vgmstream** — https://github.com/vgmstream/vgmstream — decodes most game audio formats (`.wem`, `.adx`, `.hca`, `.fsb`, …).
 - **quickbms** — https://aluigi.altervista.org/quickbms.htm — archive extractor; scripts at
   https://aluigi.altervista.org/bms/ . Mirror: https://github.com/LittleBigBug/QuickBMS
 - **Noesis** — https://richwhitehouse.com/index.php?content=inc_projects.php — model/texture converter.
 
 ### Xbox-specific (for the xboxrecomp path)
-- **xdvdfs** — https://github.com/antangelo/xdvdfs — modern Xbox ISO tool.
-- **extract-xiso** — https://github.com/XboxDev/extract-xiso — classic ISO extractor.
+- **xdvdfs** — https://github.com/antangelo/xdvdfs — modern Xbox ISO tool (extract + build).
 - **xemu** — https://github.com/xemu-project/xemu — Xbox emulator (use it to compare behavior
   against your recomp; xboxrecomp's APU/NV2A code is derived from it).
 - **Cxbx-Reloaded** — https://github.com/Cxbx-Reloaded/Cxbx-Reloaded — HLE Xbox emulator.
@@ -101,7 +107,6 @@ first — the GBA skill exists exactly for that.
 - **floss** — https://github.com/mandiant/flare-floss — extract de-obfuscated/stack strings.
 - **PE-bear** — https://github.com/hasherezade/pe-bear — PE viewer/editor, section/directories analysis.
 - **ReClass.NET** — https://github.com/ReClassNET/ReClass.NET — live memory scanner + C++ structure builder; pair with x64dbg/Cheat Engine.
-- **dex2jar** — https://github.com/pxb1988/dex2jar — Android DEX → jar (feed to JD-GUI/CFR/Recaf).
 - **JPEXS FFDec** — https://github.com/jindrapetrik/jpexs-decompiler — Flash/SWF decompiler + editor.
 - **Il2CppDumper** — https://github.com/Perfare/Il2CppDumper — IL2CPP `GameAssembly.dll` + `global-metadata.dat` → types/methods/structs.
 - **UABEA** — https://github.com/nesrak1/UABEA — Unity asset/bundle editor (standalone mod installers).
@@ -113,7 +118,6 @@ first — the GBA skill exists exactly for that.
 
 ## Newly added (layer 3 — network, binary diffing, deobfuscation)
 
-- **Miasm** — https://github.com/cea-sec/miasm — Python RE framework (IR, symbolic execution, emulation). `pip install miasm`.
 - **Diaphora** — https://github.com/joxeankoret/diaphora — binary diffing (patch analysis, diffing between versions). Plugin for IDA Pro / Ghidra; cloned into `01_Disassemblers/diaphora`.
 - **Triton** — https://github.com/JonathanSalwan/Triton — DBA + dynamic symbolic execution / taint. Cloned as source; build with CMake (note: the PyPI `triton` package is OpenAI's GPU compiler, not this).
 - **de4dot** — https://github.com/0xd4d/de4dot — .NET deobfuscator (un-ConfuserEx, un-rename, string decrypt). Cloned as source; build with msbuild/dotnet.
@@ -121,6 +125,21 @@ first — the GBA skill exists exactly for that.
 - **Objection** — https://github.com/sensepost/objection — Frida-based mobile runtime inspection (`pip install objection`).
 - **Wireshark** — https://www.wireshark.org — packet capture (install via `scripts/install-extras.ps1` or your package manager).
 - **Caido** — https://caido.io — web/API security toolkit; "Basic" tier is free but requires an account (install manually).
+
+## Newly added (layer 4 — engine-specific modding)
+
+- **FModel** — UE `.pak`/`.uasset`/`.umap` browsing and export; the tool modders reach for first on Unreal games.
+- **UAssetGUI** — GUI editor for UE `.uasset` fields; pair with FModel for read → edit.
+- **UE4SS** — runtime framework for UE4/5: Lua/C++ mods, blueprint mod loading, live property editor, SDK dumping.
+- **repak** — Rust CLI to unpack/repack UE `.pak` files (ideal for distributing mods).
+- **GDRE Tools** — Godot RE: unpack `.pck`, recover project files, decompile GDScript/C#.
+- **UndertaleModTool** — GameMaker RE: unpack `data.win`, decompile GML, edit assets, repack.
+- **Cpp2IL** — IL2CPP metadata/code recovery; output can be opened in dnSpy/ILSpy when Il2CppDumper's dummy DLLs are not enough.
+- **vgmstream** — reference decoder for game audio; `vgmstream-cli` converts `.wem`, `.adx`, `.hca`, `.fsb`, etc. to WAV.
+- **UPX** — unpack UPX-packed binaries before Ghidra/rizin sees them.
+
+Removed as redundant: **dex2jar** (jadx handles APK → Java), **Miasm** (angr covers
+symbolic execution), **extract-xiso** (xdvdfs extracts and builds XISOs).
 
 ## Community indexes to mine for more
 
@@ -141,7 +160,8 @@ These are the best "add more later" sources:
 ## Suggested order of attack for a new game
 
 1. Detect It Easy → what engine/packer?
-2. If Unity: `AssetRipper` + `dnSpy`/IL2CPP path. If UE: `FModel`.
+2. If Unity: `AssetRipper` + `dnSpy`/IL2CPP path. If UE: `FModel` + `UAssetGUI`/`UE4SS`.
+   If Godot: `GDRE Tools`. If GameMaker: `UndertaleModTool`. If native: check for `UPX` first.
 3. If native: `Ghidra` for structure, `RetDec` for bulk C, `x64dbg` to confirm at runtime.
 4. If you want a **port**, not a patch: matching decomp (GBA/N64/GC) or static recomp
    (Xbox/360) — use the repos above, they are different disciplines.

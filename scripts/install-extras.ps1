@@ -20,8 +20,7 @@ if(W "ninjaripper"){ Write-Host "Ninja Ripper: https://gamebanana.com/tools/5638
 # Emulators with RAM search / Lua (console modding)
 if(W "emulators"){ Winget "DolphinEmu.Dolphin"; Winget "PCSX2Team.PCSX2"; Winget "Ryujinx.Ryujinx"; Winget "PPSSPP.PPSSPP"; Winget "melonDS.melonDS"; Winget "BizHawk.BizHawk" }
 
-# Unreal Engine asset tools
-if(W "ue"){ Write-Host "FModel: https://github.com/FModel-Tools/FModel/releases   |   UAssetGUI: https://github.com/atenfyr/UAssetGUI/releases" }
+# Unreal Engine asset tools (FModel, UAssetGUI, UE4SS, repak) are now auto-bundled.
 
 # API / process monitoring
 if(W "monitor"){ Winget "Microsoft.Sysinternals.ProcessExplorer"; Winget "Microsoft.Sysinternals.ProcessMonitor"; Write-Host "API Monitor: http://www.rohitab.com/apimonitor" }

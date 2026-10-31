@@ -28,7 +28,6 @@ release at install time. Each tool remains under its own license, listed below.
 | RetDec | https://github.com/avast/retdec | MIT |
 | jadx | https://github.com/skylot/jadx | Apache-2.0 |
 | Apktool | https://github.com/iBotPeaches/Apktool | Apache-2.0 |
-| dex2jar | https://github.com/pxb1988/dex2jar | Apache-2.0 |
 | JPEXS FFDec | https://github.com/jindrapetrik/jpexs-decompiler | GPL-3.0 |
 | ILSpy | https://github.com/icsharpcode/ILSpy | MIT |
 | xboxrecomp | https://github.com/sp00nznet/xboxrecomp | MIT (APU/NV2A parts LGPL-2.1) |
@@ -38,13 +37,21 @@ release at install time. Each tool remains under its own license, listed below.
 | AssetRipper | https://github.com/AssetRipper/AssetRipper | GPL-3.0 |
 | UABEA | https://github.com/nesrak1/UABEA | MIT |
 | Il2CppDumper | https://github.com/Perfare/Il2CppDumper | MIT |
+| Cpp2IL | https://github.com/SamboyCoding/Cpp2IL | MIT |
 | BepInEx | https://github.com/BepInEx/BepInEx | LGPL-2.1 |
 | MelonLoader | https://github.com/LavaGang/MelonLoader | Apache-2.0 |
+| FModel | https://github.com/4sval/FModel | GPL-3.0 |
+| UAssetGUI | https://github.com/atenfyr/UAssetGUI | MIT |
+| UE4SS | https://github.com/UE4SS-RE/RE-UE4SS | MIT |
+| repak | https://github.com/trumank/repak | Apache-2.0 |
+| GDRE Tools | https://github.com/GDRETools/gdsdecomp | MIT |
+| UndertaleModTool | https://github.com/UnderminersTeam/UndertaleModTool | GPL-3.0 |
+| vgmstream | https://github.com/vgmstream/vgmstream | ISC-style (see repo COPYING) |
+| UPX | https://github.com/upx/upx | GPL-2.0+ with UPX exception |
 | QuickBMS | https://aluigi.altervista.org/quickbms.htm (mirror https://github.com/LittleBigBug/QuickBMS) | GPL-2.0 |
 | xdelta3 | https://github.com/jmacd/xdelta-gpl | GPL-2.0 |
 | flips | https://github.com/Alcaro/flips | GPL-3.0 |
 | xdvdfs | https://github.com/antangelo/xdvdfs | MIT |
-| extract-xiso | https://github.com/XboxDev/extract-xiso | GPL-3.0 |
 | ReClass.NET | https://github.com/ReClassNET/ReClass.NET | MIT |
 | Frida | https://frida.re | wxWindows Library Licence |
 | decomp2dbg | https://github.com/mahaloz/decomp2dbg | BSD-2-Clause |
@@ -66,7 +73,6 @@ release at install time. Each tool remains under its own license, listed below.
 | rzpipe | https://github.com/rizinorg/rz-pipe | MIT |
 | angr | https://github.com/angr/angr | BSD-2-Clause |
 | androguard | https://github.com/androguard/androguard | Apache-2.0 |
-| Miasm | https://github.com/cea-sec/miasm | GPL-2.0 |
 | Diaphora | https://github.com/joxeankoret/diaphora | Apache-2.0 (plugin for IDA Pro / Ghidra) |
 | Triton | https://github.com/JonathanSalwan/Triton | Apache-2.0 (build from source) |
 | de4dot | https://github.com/0xd4d/de4dot | GPL-3.0 |
