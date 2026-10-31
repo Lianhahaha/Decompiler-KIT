@@ -614,6 +614,54 @@
         "objection"
       ],
       "license": "MIT"
+    },
+    {
+      "id": "fmodel",
+      "name": "FModel",
+      "kind": "release",
+      "category": "05_Game-Mods-and-Assets",
+      "repo": "4sval/FModel",
+      "tag": "aug-2026",
+      "asset": "FModel.zip",
+      "extract": "zip",
+      "sha256": "ce1995fbc876cd0d0f54d3f7af5babc0e949d87fe4c4f2fada55c6e1e062eacc",
+      "license": "GPL-3.0"
+    },
+    {
+      "id": "ue4ss",
+      "name": "UE4SS",
+      "kind": "release",
+      "category": "05_Game-Mods-and-Assets",
+      "repo": "UE4SS-RE/RE-UE4SS",
+      "tag": "v3.0.1",
+      "asset": "UE4SS_v3.0.1.zip",
+      "extract": "zip",
+      "sha256": "4b47d4bceddd2f561a4e395bfa00924ccfc945af576a2d0c613e6537846c57ec",
+      "license": "MIT"
+    },
+    {
+      "id": "uassetgui",
+      "name": "UAssetGUI",
+      "kind": "release",
+      "category": "05_Game-Mods-and-Assets",
+      "repo": "atenfyr/UAssetGUI",
+      "tag": "v1.1.0",
+      "asset": "UAssetGUI.exe",
+      "extract": "none",
+      "sha256": "b7d75c0893f1a60e565853ae638bc21f2416cd12c2d9d854e297abb87ceb3263",
+      "license": "MIT"
+    },
+    {
+      "id": "repak",
+      "name": "repak",
+      "kind": "release",
+      "category": "05_Game-Mods-and-Assets",
+      "repo": "trumank/repak",
+      "tag": "v0.2.3",
+      "asset": "repak_cli-x86_64-pc-windows-msvc.zip",
+      "extract": "zip",
+      "sha256": "6720d602144d75df477a99d5bedb6ea780997546afc335901d4937cafeaa73fa",
+      "license": "Apache-2.0"
     }
   ]
 }
