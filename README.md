@@ -2,10 +2,10 @@
 
 A self-installing, reproducible toolkit for **decompiling, reverse-engineering, and
 statically recompiling binaries**, with an accompanying asset-pipeline and runtime tooling
-set. One command installs ~60 tools (Ghidra, Binary Ninja Free, rizin/Cutter, RetDec, x64dbg,
-dnSpy, ILSpy, jadx, Frida, angr, xboxrecomp, N64Recomp, XenonRecomp, and more) from their
-official upstream releases, with per-tool SHA-256 verification where upstream pins allow it,
-plus license attribution.
+set. One command installs 60+ tools (Ghidra, Binary Ninja Free, rizin/Cutter, RetDec, x64dbg,
+dnSpy, ILSpy, jadx, Frida, MinHook, VPKEdit, angr, xboxrecomp, N64Recomp, XenonRecomp, and
+more) from their official upstream releases, with per-tool SHA-256 verification where
+upstream pins allow it, plus license attribution.
 
 The repo itself is small (this is a bootstrap + manifest, no tool binaries). Everything is
 declared in a single machine-readable manifest and materialised locally on demand, so the
@@ -57,6 +57,22 @@ installed layout is deterministic and reproducible across machines.
 It is not a wrapper or an emulator: it is a **pin-and-fetch layer** over the real tools. You
 get the same `ghidraRun`, `rizin`, `retdec-decompiler`, `x64dbg`, `ILSpy`, `jadx`, etc. that
 you would get from upstream — just resolved into one predictable directory tree.
+
+### Scope
+
+This repository installs tools and documents how to use them. It is **not** a decompiler
+and **not** a mod loader.
+
+- Decompilation means Ghidra/RetDec output you can read. For native PC games that is
+  analysis, not a project that compiles back into a playable build.
+- **Recompilation** is per target: static recompilers for Xbox/N64/Xbox 360, matching
+  decompilation for GBA, real rebuilds for .NET and Android, and no rebuild for native PC
+  or IL2CPP. The full matrix is in [`docs/recompilation.md`](docs/recompilation.md).
+- **Gameplay modding** on a native PC game still needs a patch or a hook you write. The kit
+  supplies the analysis tools, MinHook/Detours, Frida, and the workflow in
+  [`docs/native-hooking.md`](docs/native-hooking.md).
+- **Source engine** games have dedicated coverage: VPK and BSP tools, plus the config-mod
+  pattern. See [`docs/source-engine.md`](docs/source-engine.md).
 
 The design goals, in order:
 
@@ -192,16 +208,23 @@ environment — invoke them via `python -m` or their entry-point scripts.
 
 ```
 decompiler-kit/
-├─ manifest/tools.json      # source of truth: 60 tools, 7 categories
+├─ manifest/tools.json      # source of truth: 64 tools, 7 categories
 ├─ bootstrap.ps1 | .sh      # installers (release / git / pip / direct kinds)
 ├─ env.ps1 | .sh            # session activation (PATH, GHIDRA_HOME, GAME_RE_ROOT)
 ├─ AGENTS.md                # AI-agent setup instructions (auto-install this kit)
 ├─ SKILL.md                 # AI-agent skill (per-target workflows)
 ├─ NOTICE.md                # per-tool licenses + upstream URLs
-├─ docs/research.md         # deep notes: what each tool is for, what to add later
+├─ docs/
+│  ├─ research.md           # deep notes: what each tool is for, what to add later
+│  ├─ source-engine.md      # VPK, BSP, models, cfg mods, SourceMod
+│  ├─ native-hooking.md     # patch vs hook, MinHook/Detours/Frida
+│  └─ recompilation.md      # what recompiles and what does not
+├─ examples/
+│  └─ l4d2-infinite-ammo/   # worked Source config mod, with verification notes
 ├─ scripts/
 │  ├─ install-extras.ps1    # Tier-D: adware/account-gated/big tools (winget + links)
-│  └─ harden.ps1            # disable Ghidra usage metrics + GUI telemetry toggles
+│  ├─ harden.ps1            # disable Ghidra usage metrics + GUI telemetry toggles
+│  └─ check_manifest.py     # schema + link checker (also runs in CI)
 ├─ dissectdat/              # vendored REA source (MIT, © morluto) — see above
 └─ tools/                   # created by bootstrap; NOT committed (gitignored)
 ```
@@ -278,13 +301,15 @@ paths below show the category and tool id.
 | **repak** | Unreal `.pak` packer/unpacker (CLI). |
 | **GDRE Tools** | Godot `.pck` extractor + project decompiler (GDScript/C#). |
 | **UndertaleModTool** | GameMaker (`data.win`) unpacker/decompiler/repacker: code, assets, and mods. |
+| **VPKEdit** | Source VPK/PCK reader and writer (CLI + GUI): list, extract, pack, modify, sign. |
+| **BSPSource** | Source `.bsp` map to `.vmf` source (Java); the standard map decompiler. |
 | **quickbms** | Generic archive extractor (thousands of community scripts). |
 | **xdelta3** | Binary diff/patch (the standard for ROM-hack patches). |
 | **flips** | IPS/BPS patcher. |
 | **armips** | Assembler for patching console binaries. |
 | **asar** | SNES ROM assembler/patch tool. |
 | **xdvdfs** | Modern Xbox ISO tool (extract/build). |
-| **Crowbar** | Source-engine asset (VPK/MDL) extractor/compiler. |
+| **Crowbar** | Source-model compiler/decompiler (`.mdl` <-> QC/SMD). |
 | **vgmstream** | Game audio decoder/player (`.wem`, `.adx`, `.hca`, `.fsb`, many more). |
 
 ### `06_Memory-and-Instrumentation` — live process work
@@ -292,6 +317,8 @@ paths below show the category and tool id.
 | Tool | What it's for |
 | --- | --- |
 | **Frida** | Dynamic instrumentation: hook functions, dump memory, bypass checks (pip). |
+| **MinHook** | Minimal x86/x64 API hooking library (header + static lib) for Windows DLL mods. |
+| **Detours** | Microsoft's function-hooking library (source, built with `nmake`). |
 | **ReClass.NET** | Live memory scanner + C++ structure builder (pairs with x64dbg). |
 | **SystemInformer** | Process/memory/handle inspector (Sysinternals-style). |
 | **Squalr** | Open-source memory scanner (Cheat Engine alternative). |
@@ -344,6 +371,7 @@ rizin -q -c "iI; ii; iS" target.exe
 | `UnityPlayer.dll`, `GameAssembly.dll`, `*_Data/` | Unity (Mono or IL2CPP) |
 | `Managed/Assembly-CSharp.dll` | Unity Mono → dnSpy / BepInEx |
 | `global-metadata.dat` + `GameAssembly.dll` | Unity IL2CPP → Cpp2IL / Il2CppDumper + MelonLoader |
+| `gameinfo.txt` + `pak01_dir.vpk` | Source → VPKEdit / BSPSource / cfg mods (docs/source-engine.md) |
 | `.pak` + `Engine/` | Unreal → FModel / UAssetGUI / UE4SS |
 | `.pck` + `project.godot` | Godot → GDRE Tools |
 | `data.win` / `game.win` | GameMaker → UndertaleModTool |
@@ -380,6 +408,39 @@ $g = (Get-ChildItem "$GAME_RE_ROOT\01_Disassemblers\ghidra" -Directory | Sort Na
 ```powershell
 & "$GAME_RE_ROOT\02_Debuggers\x64dbg\release\x64\x64dbg.exe" target.exe
 ```
+
+### Source engine (VPK / BSP / cfg)
+
+```powershell
+$vp = "$GAME_RE_ROOT\05_Game-Mods-and-Assets\vpkedit\vpkeditcli.exe"
+& $vp --file-tree "Game\left4dead2\pak01_dir.vpk"                 # list
+New-Item -ItemType Directory -Force C:\work\vpk | Out-Null
+& $vp -e / -o C:\work\vpk "Game\left4dead2\pak01_dir.vpk"          # extract all
+& $vp -v 1 -o "Game\left4dead2\addons\my_addon.vpk" C:\work\my_addon  # pack an addon
+
+# map -> Hammer source
+java -jar "$GAME_RE_ROOT\05_Game-Mods-and-Assets\bspsrc\bspsrc.jar" -o C:\work\vmf "Game\left4dead2\maps\c1m1_hotel.bsp"
+```
+
+Config mods need no binary edit: `cfg/listenserver.cfg` runs on every local map start.
+Full workflow and the L4D2 example: [`docs/source-engine.md`](docs/source-engine.md).
+
+### Compile-time hooks (native PC)
+
+```powershell
+# MinHook: include + static lib, link into your DLL
+& "$GAME_RE_ROOT\06_Memory-and-Instrumentation\minhook\include"   # MinHook.h
+& "$GAME_RE_ROOT\06_Memory-and-Instrumentation\minhook\lib"       # libMinHook.x64.lib
+
+# Detours: build the source once, link detours.lib
+cd "$GAME_RE_ROOT\06_Memory-and-Instrumentation\detours"
+
+# Frida for a quick runtime check before writing the DLL
+frida -p <pid> -l hook.js
+```
+
+The kit ships no injector and no universal mod loader; see
+[`docs/native-hooking.md`](docs/native-hooking.md) for the DLL/loader options.
 
 ### AI-agent-driven Ghidra (MCP)
 
@@ -498,7 +559,7 @@ Adding a tool is a data change. Edit `manifest/tools.json`, re-run the bootstrap
 | `submodules` | git | optional | `true` to recurse submodules. |
 | `packages` | pip | yes | Array of pip package names. |
 | `url` | direct | yes* | Vendor download URL (*unless per-OS `platforms` given). |
-| `platforms` | direct | optional | `{ "win32": {url, extract}, "darwin": …, "linux": … }`. |
+| `platforms` | direct | optional | `{ "win32": {url, extract, sha256}, "darwin": …, "linux": … }`. |
 | `extract` | direct | optional | Same values as `release`, per platform (default `none`). |
 
 **Release** (pinned GitHub asset):
@@ -547,16 +608,32 @@ Adding a tool is a data change. Edit `manifest/tools.json`, re-run the bootstrap
   "license": "Proprietary (free non-commercial tier; no API/plugins)" }
 ```
 
+When different platforms ship different binaries, pin a hash per platform. The platform
+hash wins over a top-level `sha256`:
+
+```json
+{ "id": "vpkedit", "name": "VPKEdit", "kind": "direct",
+  "category": "05_Game-Mods-and-Assets",
+  "platforms": {
+    "win32": { "url": "https://…/VPKEdit-Windows-Standalone-msvc-Release.zip", "extract": "zip", "sha256": "<64 hex chars>" },
+    "linux": { "url": "https://…/VPKEdit-Linux-Standalone-gcc-Release.zip", "extract": "zip", "sha256": "<64 hex chars>" }
+  },
+  "license": "MIT" }
+```
+
 ## Reproducibility and verification
 
 - Downloads are pinned by exact `tag` + `asset`.
-- When `sha256` is present, the bootstrapper aborts that tool on mismatch.
+- When `sha256` is present, the bootstrapper aborts that tool on mismatch. For `direct`
+  tools the per-platform hash is used, so Windows/Linux/macOS builds can each be verified.
 - The bootstrap skips populated directories, so re-runs are cheap and repair-focused.
 - Install logs are written to `<root>/install.log` (gitignored).
 - `kind: git` tools are shallow clones; `kind: pip` resolves the latest matching wheel (pin via
   your own constraints if you need bit-for-bit reproducibility for those).
-- `kind: direct` uses the vendor's official unversioned installer URL (Binary Ninja Free), so
-  neither the version nor a sha256 is pinned — re-running fetches the current free build.
+- `kind: direct` uses the vendor's official installer URL. Pin `platforms.<os>.sha256` when
+  the vendor publishes stable assets; Binary Ninja Free does not, so its hash is omitted.
+- `scripts/check_manifest.py` validates the manifest and (with `--urls`) checks every
+  download URL; CI runs it on push and weekly.
 
 ## As an AI-agent skill
 

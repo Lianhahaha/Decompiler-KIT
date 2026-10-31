@@ -70,6 +70,10 @@ release at install time. Each tool remains under its own license, listed below.
 | asar | https://github.com/RPGHacker/asar | MIT |
 | CyberChef | https://github.com/gchq/CyberChef | Apache-2.0 |
 | Crowbar | https://github.com/ZeqMacaw/Crowbar | MIT |
+| VPKEdit | https://github.com/craftablescience/VPKEdit | MIT |
+| BSPSource | https://github.com/ata4/bspsrc | Unlicense (public domain) |
+| MinHook | https://github.com/TsudaKageyu/minhook | BSD-2-Clause |
+| Detours | https://github.com/microsoft/Detours | MIT |
 | rzpipe | https://github.com/rizinorg/rz-pipe | MIT |
 | angr | https://github.com/angr/angr | BSD-2-Clause |
 | androguard | https://github.com/androguard/androguard | Apache-2.0 |

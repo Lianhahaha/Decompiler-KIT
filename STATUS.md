@@ -13,8 +13,8 @@ pinned in `manifest/tools.json`) into `tools/` at install time.
 | `02_Debuggers` | x64dbg, dnSpy, ScyllaHide, decomp2dbg |
 | `03_Source-Decompilers` | RetDec, jadx, apktool, JPEXS FFDec, ILSpy, Recaf, de4dot |
 | `04_Static-Recompilation` | xboxrecomp, N64Recomp (+RecompModTool), XenonRecomp, gba-matching-decomp-skill |
-| `05_Game-Mods-and-Assets` | AssetRipper, UABEA, Il2CppDumper, Cpp2IL, BepInEx, MelonLoader, FModel, UAssetGUI, UE4SS, repak, GDRE Tools, UndertaleModTool, vgmstream, quickbms, xdelta3, flips, armips, asar, xdvdfs, Crowbar |
-| `06_Memory-and-Instrumentation` | Frida, ReClass.NET, SystemInformer, Squalr |
+| `05_Game-Mods-and-Assets` | AssetRipper, UABEA, Il2CppDumper, Cpp2IL, BepInEx, MelonLoader, FModel, UAssetGUI, UE4SS, repak, GDRE Tools, UndertaleModTool, VPKEdit, BSPSource, vgmstream, quickbms, xdelta3, flips, armips, asar, xdvdfs, Crowbar |
+| `06_Memory-and-Instrumentation` | Frida, MinHook, Detours, ReClass.NET, SystemInformer, Squalr |
 | `07_Network-and-APIs` | Mitmproxy, Objection |
 
 Python libs (via pip): capstone, pefile, lief, keystone, unicorn, dnfile, frida,
@@ -35,12 +35,23 @@ Wireshark, Caido (Basic).
 
 ## Roadmap
 
-- [ ] CI job that runs the bootstrap against a clean checkout to catch dead links /
-      version bumps (keeps the pinned sha256/tag list honest).
+- [x] CI job that validates the manifest and runs a one-tool bootstrap smoke test.
+- [x] Weekly link check for every pinned download URL (`scripts/check_manifest.py --urls`).
+- [x] Worked example (`examples/l4d2-infinite-ammo/`).
 - [ ] More Linux/macOS release assets where upstream provides them (many pins are
-      Windows-only today).
+      Windows-only today; VPKEdit and BSPSource are the first cross-platform additions).
 - [ ] Optional telemetry-hardening step (`scripts/harden.ps1`) is provided; verify the
       Ghidra/AssetRipper/ImHex/Cutter/Squalr toggles after a GUI update.
+- [ ] SourceMod/Metamod snapshots: keep manual until a stable, versioned download URL exists.
+
+## Scope notes
+
+- Recompilation is per target. See `docs/recompilation.md`; native PC and IL2CPP are not
+  rebuildable from decompiler output.
+- Source engine coverage is VPKEdit + BSPSource + cfg mods. SourceMod/Metamod are
+  documented but not pinned, because their builds rotate per game.
+- Native hooking ships MinHook and Detours, but no injector and no universal mod loader.
+  See `docs/native-hooking.md`.
 
 ## How to run
 
@@ -59,6 +70,9 @@ Windows). Install elsewhere: set `GAME_RE_ROOT`.
 ## Key facts
 
 - Ghidra needs JDK 21+.
+- BSPSource is a jar-only build: Java 8+ is required.
+- VPKEdit is standalone on Windows/Linux; the macOS asset is a DMG inside a zip.
+- MinHook ships `MinHook.h` plus `libMinHook.x86/x64.lib`; there is no DLL to install.
 - RetDec needs `libcrypto-1_1-x64.dll` (bundled in `RetDec\bin`).
 - 7-Zip is required for `.7z`/`.rar` archives (e.g. ReClass.NET ships as `.rar`).
 - Every download's sha256 is in `manifest/tools.json`; verification is skipped only if

@@ -1,6 +1,6 @@
 ---
 name: decompiler-kit
-description: Decompile, reverse engineer, recompile, and mod games with a self-installing local toolkit. Use for native PC game binaries, Unity/Unreal/Godot/.NET/Android games, Xbox/Xbox 360/N64/GBA recompilation or matching decompilation, asset extraction, archive unpacking, audio extraction, memory scanning, and runtime hooking. First run bootstrap (./bootstrap.sh or bootstrap.ps1) then activate env (source env.sh or . .\env.ps1). Covers Ghidra (+ GhidraMCP), Binary Ninja Free, rizin/Cutter, RetDec, x64dbg, dnSpy, ILSpy, jadx, apktool, JPEXS FFDec, capa, floss, PE-bear, ImHex, Detect It Easy, UPX, Frida, AssetRipper, UABEA, Il2CppDumper, Cpp2IL, BepInEx, MelonLoader, FModel, UAssetGUI, UE4SS, repak, GDRE Tools, UndertaleModTool, vgmstream, quickbms, xdelta3, flips, ReClass.NET, xboxrecomp, N64Recomp, XenonRecomp.
+description: Decompile, reverse engineer, recompile, and mod games with a self-installing local toolkit. Use for native PC game binaries, Unity/Unreal/Godot/.NET/Android games, Source engine VPK/BSP work, Xbox/Xbox 360/N64/GBA recompilation or matching decompilation, asset extraction, archive unpacking, audio extraction, memory scanning, and runtime or compile-time hooking. First run bootstrap (./bootstrap.sh or bootstrap.ps1) then activate env (source env.sh or . .\env.ps1). Covers Ghidra (+ GhidraMCP), Binary Ninja Free, rizin/Cutter, RetDec, x64dbg, dnSpy, ILSpy, jadx, apktool, JPEXS FFDec, capa, floss, PE-bear, ImHex, Detect It Easy, UPX, Frida, MinHook, Detours, AssetRipper, UABEA, Il2CppDumper, Cpp2IL, BepInEx, MelonLoader, FModel, UAssetGUI, UE4SS, repak, GDRE Tools, UndertaleModTool, VPKEdit, BSPSource, vgmstream, quickbms, xdelta3, flips, ReClass.NET, xboxrecomp, N64Recomp, XenonRecomp.
 metadata:
   version: "2"
 ---
@@ -47,8 +47,8 @@ hardcoded paths. Tools live at `<root>/<category>/<id>`, e.g. `<root>/01_Disasse
 | `02_Debuggers` | x64dbg, dnSpy, ScyllaHide, decomp2dbg |
 | `03_Source-Decompilers` | RetDec, jadx, apktool, JPEXS FFDec, ILSpy, Recaf, de4dot |
 | `04_Static-Recompilation` | xboxrecomp, N64Recomp, XenonRecomp, gba-matching-decomp-skill |
-| `05_Game-Mods-and-Assets` | AssetRipper, UABEA, Il2CppDumper, Cpp2IL, BepInEx, MelonLoader, FModel, UAssetGUI, UE4SS, repak, GDRE Tools, UndertaleModTool, vgmstream, quickbms, xdelta3, flips, armips, asar, xdvdfs, Crowbar |
-| `06_Memory-and-Instrumentation` | Frida, ReClass.NET, SystemInformer, Squalr |
+| `05_Game-Mods-and-Assets` | AssetRipper, UABEA, Il2CppDumper, Cpp2IL, BepInEx, MelonLoader, FModel, UAssetGUI, UE4SS, repak, GDRE Tools, UndertaleModTool, VPKEdit, BSPSource, vgmstream, quickbms, xdelta3, flips, armips, asar, xdvdfs, Crowbar |
+| `06_Memory-and-Instrumentation` | Frida, MinHook, Detours, ReClass.NET, SystemInformer, Squalr |
 | `07_Network-and-APIs` | Mitmproxy, Objection |
 
 ## Triage (30 seconds)
@@ -65,6 +65,7 @@ rizin -q -c "iI; ii; iS" game.exe                                     # headers/
 | `UnityPlayer.dll` / `GameAssembly.dll` / `*_Data\` | Unity |
 | `Assembly-CSharp.dll` in `Managed\` | Unity Mono → dnSpy / BepInEx |
 | `global-metadata.dat` + `GameAssembly.dll` | Unity IL2CPP → Cpp2IL / Il2CppDumper + MelonLoader |
+| `gameinfo.txt` + `pak01_dir.vpk` | Source → VPKEdit / BSPSource / cfg mods (docs/source-engine.md) |
 | `.pak` + `Engine` folder | Unreal → FModel / UAssetGUI / UE4SS / repak |
 | `.pck` + `project.godot` | Godot → GDRE Tools |
 | `data.win` / `game.win` | GameMaker → UndertaleModTool |
@@ -94,6 +95,29 @@ python -m ghidra_mcp --headless --binary game.exe --save   # headless MCP stdio
 ```powershell
 & "$GAME_RE_ROOT\02_Debuggers\x64dbg\release\x64\x64dbg.exe" game.exe
 ```
+
+### Source engine (VPK / BSP / cfg)
+```powershell
+$vp = "$GAME_RE_ROOT\05_Game-Mods-and-Assets\vpkedit\vpkeditcli.exe"
+& $vp --file-tree "Game\left4dead2\pak01_dir.vpk"
+New-Item -ItemType Directory -Force C:\work\vpk | Out-Null
+& $vp -e / -o C:\work\vpk "Game\left4dead2\pak01_dir.vpk"
+& $vp -v 1 -o "Game\left4dead2\addons\my_addon.vpk" C:\work\my_addon
+java -jar "$GAME_RE_ROOT\05_Game-Mods-and-Assets\bspsrc\bspsrc.jar" -o C:\work\vmf "Game\left4dead2\maps\c1m1_hotel.bsp"
+# cfg mods: cfg/listenserver.cfg runs at every local map start (no binary patch)
+```
+Details: `docs/source-engine.md`; worked example: `examples/l4d2-infinite-ammo/`.
+
+### Compile-time hooks (native PC)
+```powershell
+# MinHook: include/MinHook.h + lib/libMinHook.x64.lib
+& "$GAME_RE_ROOT\06_Memory-and-Instrumentation\minhook"
+# Detours: build the source once (nmake), link detours.lib
+cd "$GAME_RE_ROOT\06_Memory-and-Instrumentation\detours"
+# Frida first to confirm the address
+frida -p <pid> -l hook.js
+```
+No injector or universal loader is bundled; see `docs/native-hooking.md`.
 
 ### Unity (Mono / IL2CPP)
 ```powershell
@@ -169,5 +193,8 @@ as original source, or a static xref as proof of runtime execution.
 ## Adding / updating a tool
 
 Edit `manifest/tools.json` (add `{id,name,kind,repo,tag,asset,extract,sha256,category,...}`),
-re-run bootstrap. `kind` is one of `release` | `git` | `pip`. Get the sha256 from the
-upstream release (or drop the field to skip verification).
+re-run bootstrap, then run `python scripts/check_manifest.py`. `kind` is one of
+`release` | `git` | `pip` | `direct`. For `direct` tools, pin `platforms.<os>.sha256`
+when the vendor has stable assets. Get the sha256 from the upstream release (or drop the
+field to skip verification). `docs/recompilation.md` explains which targets can actually
+be rebuilt.
