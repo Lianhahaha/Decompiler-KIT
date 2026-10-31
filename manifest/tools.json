@@ -361,18 +361,6 @@
       "license": "MIT"
     },
     {
-      "id": "extract-xiso",
-      "name": "extract-xiso",
-      "kind": "release",
-      "category": "05_Game-Mods-and-Assets",
-      "repo": "XboxDev/extract-xiso",
-      "tag": "build-202609111233",
-      "asset": "extract-xiso-Win64_Release.zip",
-      "extract": "zip",
-      "sha256": "fc891dfa72f08e3838a2f8b7ec34a8e4d61678da1cc8fee879677f00bf114ce3",
-      "license": "GPL-3.0"
-    },
-    {
       "id": "reclass",
       "name": "ReClass.NET",
       "kind": "release",
