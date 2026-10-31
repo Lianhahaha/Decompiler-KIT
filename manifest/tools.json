@@ -662,6 +662,30 @@
       "extract": "zip",
       "sha256": "6720d602144d75df477a99d5bedb6ea780997546afc335901d4937cafeaa73fa",
       "license": "Apache-2.0"
+    },
+    {
+      "id": "gdre-tools",
+      "name": "GDRE Tools",
+      "kind": "release",
+      "category": "05_Game-Mods-and-Assets",
+      "repo": "GDRETools/gdsdecomp",
+      "tag": "v2.7.4",
+      "asset": "GDRE_tools-v2.7.4-windows.zip",
+      "extract": "zip",
+      "sha256": "af24c563eee501effb194d83595de64696c32547b2246034dbfb891a24bfa0ad",
+      "license": "MIT"
+    },
+    {
+      "id": "cpp2il",
+      "name": "Cpp2IL",
+      "kind": "release",
+      "category": "05_Game-Mods-and-Assets",
+      "repo": "SamboyCoding/Cpp2IL",
+      "tag": "2022.0.7",
+      "asset": "Cpp2IL-2022.0.7-Windows.exe",
+      "extract": "none",
+      "sha256": "f2731831776bf3367d87217860db1c56f4da1ec458db36cf7cea241002deb625",
+      "license": "MIT"
     }
   ]
 }
