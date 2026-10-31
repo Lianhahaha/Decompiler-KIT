@@ -550,16 +550,6 @@
       "license": "BSD-2-Clause / Apache-2.0"
     },
     {
-      "id": "miasm",
-      "name": "Miasm",
-      "kind": "pip",
-      "category": "01_Disassemblers",
-      "packages": [
-        "miasm"
-      ],
-      "license": "GPL-2.0"
-    },
-    {
       "id": "diaphora",
       "name": "Diaphora",
       "kind": "git",
