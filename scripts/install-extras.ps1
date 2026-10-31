@@ -2,6 +2,7 @@
 # Usage:  powershell -ExecutionPolicy Bypass -File .\scripts\install-extras.ps1 [ -Only name1,name2 ]
 [CmdletBinding()]
 param([string[]]$Only)
+if ($Only) { $Only = @($Only | ForEach-Object { $_ -split ',' } | ForEach-Object { $_.Trim() } | Where-Object { $_ }) }
 function W($n){ if(-not $Only -or $Only.Count -eq 0){ $true } else { $Only -contains $n } }
 function Winget($id){ winget install --id $id --accept-package-agreements --accept-source-agreements --silent 2>&1 | Select-Object -Last 1 }
 

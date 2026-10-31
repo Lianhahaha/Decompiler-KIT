@@ -13,6 +13,7 @@
 param([switch]$Force, [string[]]$Only)
 
 $ErrorActionPreference = "Continue"
+if ($Only) { $Only = @($Only | ForEach-Object { $_ -split ',' } | ForEach-Object { $_.Trim() } | Where-Object { $_ }) }
 $RepoRoot = if ($PSScriptRoot) { $PSScriptRoot } else { Split-Path -Parent $MyInvocation.MyCommand.Path }
 $Root  = if ($env:GAME_RE_ROOT) { $env:GAME_RE_ROOT } else { Join-Path $RepoRoot "tools" }
 $Dl    = Join-Path $Root "_downloads"
