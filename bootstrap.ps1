@@ -81,10 +81,11 @@ foreach($t in $data.tools){
         $p = if($t.platforms){ $t.platforms.$osKey } else { $null }
         $dlUrl = if($p -and $p.url){ $p.url } else { $t.url }
         $ex = if($p -and $p.extract){ $p.extract } else { $t.extract }
+        $sha = if($p -and $p.sha256){ $p.sha256 } else { $t.sha256 }
         if(-not $dlUrl){ throw "no download url for platform '$osKey'" }
         $f = Join-Path $Dl (Split-Path $dlUrl -Leaf)
         Download $dlUrl $f
-        Verify $f $t.sha256
+        Verify $f $sha
         New-Item -ItemType Directory -Force -Path $dest | Out-Null
         switch($ex){
           "zip" { & tar.exe -xf $f -C $dest; if($LASTEXITCODE -ne 0){ throw "tar failed" } }

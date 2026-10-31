@@ -62,7 +62,7 @@ for t in d["tools"]:
     p = (t.get("platforms") or {}).get(os_key, {})
     row = [t.get("id",""), t.get("name",""), t.get("kind",""), t.get("category",""),
            t.get("repo",""), t.get("tag",""), t.get("asset",""),
-           p.get("extract", t.get("extract","")), t.get("sha256",""),
+           p.get("extract", t.get("extract","")), p.get("sha256", t.get("sha256","")),
            p.get("url", t.get("url","")), str(t.get("submodules","")),
            " ".join(t.get("packages", []))]
     print("\t".join(row))

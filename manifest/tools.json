@@ -188,10 +188,10 @@
       "kind": "release",
       "category": "03_Source-Decompilers",
       "repo": "jindrapetrik/jpexs-decompiler",
-      "tag": "nightly3606",
-      "asset": "ffdec_26.4.0_nightly3606.zip",
+      "tag": "version26.4.0",
+      "asset": "ffdec_26.4.0.zip",
       "extract": "zip",
-      "sha256": "a8355050ba7861d73aa6d44453cd138859403a2eee6072695210f218ec46e191",
+      "sha256": "56ce960aeafc7caf034e2052ba49f878a883f7c7ca690da6eeffca9587b5e4b9",
       "license": "GPL-3.0"
     },
     {
@@ -688,6 +688,62 @@
       "extract": "zip",
       "sha256": "fb8dfea4e42f851199269c62f2e2bd71472d6a73fbb36a502484461970f45121",
       "license": "GPL-3.0"
+    },
+    {
+      "id": "vpkedit",
+      "name": "VPKEdit",
+      "kind": "direct",
+      "category": "05_Game-Mods-and-Assets",
+      "platforms": {
+        "win32": {
+          "url": "https://github.com/craftablescience/VPKEdit/releases/download/v5.0.0.4/VPKEdit-Windows-Standalone-msvc-Release.zip",
+          "extract": "zip",
+          "sha256": "d9ceaf3f16aea17c06e3be79da93c55a597af1487eed8a1b42dada1ea8d54503"
+        },
+        "linux": {
+          "url": "https://github.com/craftablescience/VPKEdit/releases/download/v5.0.0.4/VPKEdit-Linux-Standalone-gcc-Release.zip",
+          "extract": "zip",
+          "sha256": "66fdc296d637afb771723134a35e8bf532eebd98fb7479dc33b37701b165b981"
+        },
+        "darwin": {
+          "url": "https://github.com/craftablescience/VPKEdit/releases/download/v5.0.0.4/VPKEdit-macOS-Installer-Clang-Release.zip",
+          "extract": "zip",
+          "sha256": "d8538d0616b0fcd6e39e934b4c25555a4348a797d4a4310f75ea9c9d2a171a27"
+        }
+      },
+      "license": "MIT"
+    },
+    {
+      "id": "bspsrc",
+      "name": "BSPSource",
+      "kind": "release",
+      "category": "05_Game-Mods-and-Assets",
+      "repo": "ata4/bspsrc",
+      "tag": "v1.4.8",
+      "asset": "bspsrc-jar-only.zip",
+      "extract": "zip",
+      "sha256": "d5effc38b78c4f60f8eb4f9be1db717bb808227a9013f82d20f34860a128b0e7",
+      "license": "Unlicense (public domain)"
+    },
+    {
+      "id": "minhook",
+      "name": "MinHook",
+      "kind": "release",
+      "category": "06_Memory-and-Instrumentation",
+      "repo": "TsudaKageyu/minhook",
+      "tag": "v1.3.4",
+      "asset": "MinHook_134_lib.zip",
+      "extract": "zip",
+      "sha256": "8dba3053104942b72208330395f9107910d306eb89263b3f2b3d0747a40c92ac",
+      "license": "BSD-2-Clause"
+    },
+    {
+      "id": "detours",
+      "name": "Detours",
+      "kind": "git",
+      "category": "06_Memory-and-Instrumentation",
+      "url": "https://github.com/microsoft/Detours.git",
+      "license": "MIT"
     }
   ]
 }
