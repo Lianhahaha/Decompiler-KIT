@@ -676,6 +676,18 @@
       "extract": "zip",
       "sha256": "d127996c76615e431be810e9c8d2910dbe3dd400600c5c0c50276fc5a17a9705",
       "license": "GPL-2.0+ with UPX exception"
+    },
+    {
+      "id": "undertalemodtool",
+      "name": "UndertaleModTool",
+      "kind": "release",
+      "category": "05_Game-Mods-and-Assets",
+      "repo": "UnderminersTeam/UndertaleModTool",
+      "tag": "0.9.2.0",
+      "asset": "UndertaleModTool_v0.9.2.0-Windows-SingleFile.zip",
+      "extract": "zip",
+      "sha256": "fb8dfea4e42f851199269c62f2e2bd71472d6a73fbb36a502484461970f45121",
+      "license": "GPL-3.0"
     }
   ]
 }
