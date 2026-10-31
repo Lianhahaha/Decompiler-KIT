@@ -1,0 +1,61 @@
+name: manifest
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+  schedule:
+    - cron: "0 6 * * 1"
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    name: schema
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Validate manifest
+        run: python scripts/check_manifest.py
+
+  links:
+    name: download links
+    if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Probe every pinned URL
+        run: python scripts/check_manifest.py --urls
+
+  smoke-windows:
+    name: bootstrap (windows)
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install one tool through bootstrap.ps1
+        shell: powershell
+        run: |
+          $env:GAME_RE_ROOT = Join-Path $env:RUNNER_TEMP "kit"
+          .\bootstrap.ps1 -Only minhook
+          $header = Join-Path $env:GAME_RE_ROOT "06_Memory-and-Instrumentation\minhook\include\MinHook.h"
+          if (-not (Test-Path $header)) { throw "MinHook.h was not installed" }
+          Get-Content "$env:GAME_RE_ROOT\install.log" -Tail 5
+
+  smoke-linux:
+    name: bootstrap (linux)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install one tool through bootstrap.sh
+        run: |
+          export GAME_RE_ROOT="$RUNNER_TEMP/kit"
+          ONLY=bspsrc ./bootstrap.sh
+          test -f "$GAME_RE_ROOT/05_Game-Mods-and-Assets/bspsrc/bspsrc.jar"
+          tail -n 5 "$GAME_RE_ROOT/install.log"
