@@ -88,6 +88,14 @@ any other cheat convar, then keep the keybinds and aliases in a separate cfg tha
 `autoexec.cfg` execs. This survives map changes because each map start re-runs
 `listenserver.cfg`.
 
+**L4D2 caveat:** starting a campaign from the main menu creates a lobby that resets
+`sv_cheats` to 0 *after* `listenserver.cfg` runs, so the cheats silently turn off.
+Tested on build 7970: `listenserver.cfg` printed its `sv_cheats 1` line, then the map
+loaded with `sv_cheats = 0`. A direct `map <name>` start (or `+map <name>` on the
+launch command line, which SmartSteamEmu/`launcher.exe` passes through) skips the
+lobby and the same cfg sticks. Use `map` for a modded session; the campaign menu is
+fine for unmodded play.
+
 A worked example, including the exact keys and the verification log lines, is in
 `examples/l4d2-infinite-ammo/`.
 

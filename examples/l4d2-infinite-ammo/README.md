@@ -5,14 +5,14 @@ Tested on Left 4 Dead 2 build 7970 (The Last Stand), Windows.
 
 ## What it does
 
-- Infinite ammo from the first second of every local map (`sv_infinite_ammo 1`).
-- Cheats enabled automatically for the session (`sv_cheats 1`).
+- Infinite ammo from the first second of the map (`sv_infinite_ammo 1`).
+- Cheats enabled automatically (`sv_cheats 1`).
 - `F8` loadout, `F9` supplies, `F11` laser + explosive ammo, `G` cycles all 18 guns,
   `F6` god, `F10` noclip, `P` refill, `F4` status.
 
 ## Install
 
-Copy the three files into `<game>\left4dead2\cfg\`, keeping the names:
+Copy the three files into `<game>\left4dead2\cfg\`:
 
 ```
 autoexec.cfg
@@ -20,32 +20,46 @@ l4d2_unlimited.cfg
 listenserver.cfg
 ```
 
-`listenserver.cfg` ships blank in a clean install, so nothing is overwritten that
-mattered. Back it up if you have your own.
-
-## How it works
-
-`cfg/listenserver.cfg` is executed by the engine every time a local listen server is
-created, including every campaign map:
+Then launch with a direct map start, not through the campaign menu:
 
 ```
-sv_cheats 1
-sv_infinite_ammo 1
+launcher.exe +map c1m1_hotel
 ```
 
-`cfg/autoexec.cfg` runs at client start and execs `l4d2_unlimited.cfg`, which holds the
-binds and aliases. `sv_infinite_ammo` is Valve's own convar; its description in
-`left4dead2\bin\server.dll` is *"Player's active weapon will never run out of ammo"*.
+A shortcut with the argument `+map c1m1_hotel` is the friendliest form. Replace
+`c1m1_hotel` with `c2m1_highway`, `c3m1_plankcountry`, `c4m1_milltown_a` or
+`c5m1_waterfront` for the other campaigns. The console (`~`) `map <name>` command
+works too.
 
-## Verification (from the test run)
+## Why the launch argument matters
 
-Console log, after loading `c1m1_hotel`:
+`cfg/listenserver.cfg` runs when the local server spawns, and it does set
+`sv_cheats 1`. But the **campaign lobby resets `sv_cheats` to 0 afterwards**. Starting
+a campaign from the main menu therefore ends with cheats off:
+
+```
+L4D2 Unlimited: cheats ON, infinite ammo ON   <- cfg ran
+Map: c1m1_hotel
+"sv_cheats" = "0"                             <- lobby reset it
+```
+
+A direct `map` start skips the lobby, so the same cfg sticks:
 
 ```
 L4D2 Unlimited: cheats ON, infinite ammo ON
-"sv_infinite_ammo" = "1" ( def. "0" )
-"sv_cheats" = "1" ( def. "0" )
+Map: c1m1_hotel
+"sv_cheats" = "1"
+"sv_infinite_ammo" = "1"
 ```
+
+## Verification (from the test runs)
+
+Same machine, same cfg, two launch paths, `F4` status bind:
+
+| Launch | `sv_cheats` | `sv_infinite_ammo` | `give` works |
+| --- | --- | --- | --- |
+| `+map c1m1_hotel` | 1 | 1 | yes |
+| Campaign via main menu | 0 | 0 | no (`Can't use cheat command give...`) |
 
 Ammo A/B with a hunting rifle (15/150):
 
@@ -54,18 +68,17 @@ Ammo A/B with a hunting rifle (15/150):
 | `sv_infinite_ammo 1` | fired | **15 / 150** |
 | `sv_infinite_ammo 0` | fired | **8 / 150** |
 
-The second row proves the clicks registered and that the convar is the thing keeping the
-counter full. The weapon cycle was also checked: `G` printed `[1/18] M16 Assault Rifle`,
-then `[2/18] AK-47`, and the AK was equipped (40/360).
+The second row proves the clicks registered and that the convar is what keeps the
+counter full. The weapon cycle was checked too: `G` printed `[1/18] M16 Assault Rifle`,
+then `[2/18] AK-47`, with the AK equipped (40/360).
 
 ## Where the kit fits
 
 This job needed no decompiler. The useful parts were archive work and string analysis:
 
-- `--file-tree` / `-e` on `pak01_dir.vpk` with VPKEdit to read the shipped weapon and
-  config scripts.
+- `--file-tree` / `-e` on `pak01_dir.vpk` with VPKEdit to read the shipped scripts.
 - A string scan of `server.dll` to find `sv_infinite_ammo` and its description.
-- In-game verification, which is the step that actually proves the mod.
+- In-game verification, which is the step that proves the mod.
 
 If the game had not shipped the convar, the next step would have been Ghidra on
 `server.dll` to find the ammo path, then a byte patch or a MinHook DLL. That is a
@@ -75,10 +88,11 @@ different job with different evidence.
 
 - Offline / local servers only. `sv_cheats` on a VAC-secured server is a bad idea.
 - Achievements may not count while cheats are on.
-- The binds are client-side. If you reset `config.cfg`, `autoexec.cfg` re-applies them on
-  the next launch.
+- The campaign menu path will always reset cheats; use `map`/`+map`.
+- The binds are client-side. If you reset `config.cfg`, `autoexec.cfg` re-applies them
+  on the next launch.
 
 ## Uninstall
 
-Delete `autoexec.cfg` and `l4d2_unlimited.cfg`, then restore the original
-`listenserver.cfg` (blank, or your backup).
+Delete `autoexec.cfg` and `l4d2_unlimited.cfg`, restore the original
+`listenserver.cfg` (blank, or your backup), and drop the `+map` argument.
