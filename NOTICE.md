@@ -15,6 +15,7 @@ release at install time. Each tool remains under its own license, listed below.
 | --- | --- | --- |
 | Ghidra | https://github.com/NationalSecurityAgency/ghidra | Apache-2.0 (some modules GPL-3.0) |
 | GhidraMCP | https://github.com/LaurieWired/GhidraMCP | Apache-2.0 |
+| Hyperion | https://github.com/Sidenai/hyperion-disassembler | MIT |
 | Binary Ninja (Free) | https://binary.ninja/free/ | Proprietary (free non-commercial tier) |
 | Rizin | https://github.com/rizinorg/rizin | LGPL-3.0 |
 | Cutter | https://github.com/rizinorg/cutter | GPL-3.0 |
@@ -26,6 +27,8 @@ release at install time. Each tool remains under its own license, listed below.
 | x64dbg | https://github.com/x64dbg/x64dbg | GPL-3.0 |
 | dnSpy | https://github.com/dnSpyEx/dnSpy | GPL-3.0 |
 | RetDec | https://github.com/avast/retdec | MIT |
+| Vineflower | https://github.com/Vineflower/vineflower | Apache-2.0 |
+| Kaitai Struct Compiler | https://github.com/kaitai-io/kaitai_struct_compiler | GPL-3.0 |
 | jadx | https://github.com/skylot/jadx | Apache-2.0 |
 | Apktool | https://github.com/iBotPeaches/Apktool | Apache-2.0 |
 | JPEXS FFDec | https://github.com/jindrapetrik/jpexs-decompiler | GPL-3.0 |
@@ -36,6 +39,7 @@ release at install time. Each tool remains under its own license, listed below.
 | gba-matching-decomp-skill | https://github.com/FacundoMainere/gba-matching-decomp-skill | MIT |
 | AssetRipper | https://github.com/AssetRipper/AssetRipper | GPL-3.0 |
 | UABEA | https://github.com/nesrak1/UABEA | MIT |
+| UnityPy | https://github.com/K0lb3/UnityPy | MIT |
 | Il2CppDumper | https://github.com/Perfare/Il2CppDumper | MIT |
 | Cpp2IL | https://github.com/SamboyCoding/Cpp2IL | MIT |
 | BepInEx | https://github.com/BepInEx/BepInEx | LGPL-2.1 |
@@ -44,6 +48,7 @@ release at install time. Each tool remains under its own license, listed below.
 | UAssetGUI | https://github.com/atenfyr/UAssetGUI | MIT |
 | UE4SS | https://github.com/UE4SS-RE/RE-UE4SS | MIT |
 | repak | https://github.com/trumank/repak | Apache-2.0 |
+| retoc | https://github.com/trumank/retoc | MIT |
 | GDRE Tools | https://github.com/GDRETools/gdsdecomp | MIT |
 | UndertaleModTool | https://github.com/UnderminersTeam/UndertaleModTool | GPL-3.0 |
 | vgmstream | https://github.com/vgmstream/vgmstream | ISC-style (see repo COPYING) |
@@ -55,6 +60,7 @@ release at install time. Each tool remains under its own license, listed below.
 | ReClass.NET | https://github.com/ReClassNET/ReClass.NET | MIT |
 | Frida | https://frida.re | wxWindows Library Licence |
 | decomp2dbg | https://github.com/mahaloz/decomp2dbg | BSD-2-Clause |
+| ret-sync | https://github.com/bootleg/ret-sync | GPL-3.0 |
 | capstone | https://github.com/capstone-engine/capstone | BSD-3-Clause |
 | pefile | https://github.com/erocarrera/pefile | MIT |
 | LIEF | https://github.com/lief-project/LIEF | Apache-2.0 |
@@ -64,6 +70,7 @@ release at install time. Each tool remains under its own license, listed below.
 | SystemInformer | https://github.com/winsiderss/systeminformer | MIT |
 | Dependencies | https://github.com/lucasg/Dependencies | MIT |
 | ScyllaHide | https://github.com/x64dbg/ScyllaHide | GPL-3.0 |
+| Scylla | https://github.com/NtQuery/Scylla | GPL-3.0 |
 | Squalr | https://github.com/Squalr/Squalr | GPL-3.0 |
 | Recaf | https://github.com/Col-E/Recaf | MIT |
 | armips | https://github.com/Kingcom/armips | MIT |
@@ -84,7 +91,9 @@ API/plugin access and is non-commercial). Paid Binary Ninja editions are not bun
 
 Tools in `scripts/install-extras.ps1` are not auto-bundled: Cheat Engine (freeware,
 installer bundles third-party offers — decline them), IDA Free (proprietary, free tier),
-Wireshark (GPL-2.0), Caido (proprietary, "Basic" tier requires account).
+WinDbg (Microsoft, free), API Monitor (freeware), PEStudio (freeware), Reko (GPL-2.0,
+requires the .NET 8 runtime), pyinstxtractor-ng (GPL-3.0-only; use a venv), Wireshark
+(GPL-2.0), Caido (proprietary, "Basic" tier requires account).
 
 (Licenses above are best-effort; confirm from each upstream repo's LICENSE before redistributing.)
 

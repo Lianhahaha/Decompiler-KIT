@@ -688,6 +688,96 @@
       "extract": "zip",
       "sha256": "fb8dfea4e42f851199269c62f2e2bd71472d6a73fbb36a502484461970f45121",
       "license": "GPL-3.0"
+    },
+    {
+      "id": "hyperion",
+      "name": "Hyperion",
+      "kind": "direct",
+      "category": "01_Disassemblers",
+      "platforms": {
+        "win32": {
+          "url": "https://github.com/Sidenai/hyperion-disassembler/releases/download/0.1.6stable/Hyperion-Windows-x64.zip",
+          "extract": "zip",
+          "sha256": "50a186b05d6ef99a9fb535e93ef8758b406def6a1a5e1a4ebfa721ed11109282"
+        },
+        "darwin": {
+          "url": "https://github.com/Sidenai/hyperion-disassembler/releases/download/0.1.6stable/Hyperion-macOS.zip",
+          "extract": "zip",
+          "sha256": "5979e85b8bc86db72710aaae48b15e1879aa3c7fa3b8c14be25eb85d93ee8076"
+        },
+        "linux": {
+          "url": "https://github.com/Sidenai/hyperion-disassembler/releases/download/0.1.6stable/Hyperion-Linux-x64.zip",
+          "extract": "zip",
+          "sha256": "2ff8fa895f16c929573901a4fd16f88b729cac7a32ae2940a5f70d774479382e"
+        }
+      },
+      "license": "MIT"
+    },
+    {
+      "id": "kaitai-struct",
+      "name": "Kaitai Struct Compiler",
+      "kind": "release",
+      "category": "01_Disassemblers",
+      "repo": "kaitai-io/kaitai_struct_compiler",
+      "tag": "0.11",
+      "asset": "kaitai-struct-compiler-0.11.zip",
+      "extract": "zip",
+      "sha256": "ff89389d9dc9e770d78a24af328763cb1f8e7b31ce7766c9edf10669a060f2a2",
+      "license": "GPL-3.0"
+    },
+    {
+      "id": "ret-sync",
+      "name": "ret-sync",
+      "kind": "git",
+      "category": "02_Debuggers",
+      "url": "https://github.com/bootleg/ret-sync.git",
+      "license": "GPL-3.0"
+    },
+    {
+      "id": "vineflower",
+      "name": "Vineflower",
+      "kind": "release",
+      "category": "03_Source-Decompilers",
+      "repo": "Vineflower/vineflower",
+      "tag": "1.11.1",
+      "asset": "vineflower-1.11.1.jar",
+      "extract": "none",
+      "sha256": "a615d07ddbbcd489369674f40e42df639c32be95410890b38f173d5c1e2ea39c",
+      "license": "Apache-2.0"
+    },
+    {
+      "id": "retoc",
+      "name": "retoc",
+      "kind": "release",
+      "category": "05_Game-Mods-and-Assets",
+      "repo": "trumank/retoc",
+      "tag": "v0.1.5",
+      "asset": "retoc_cli-x86_64-pc-windows-msvc.zip",
+      "extract": "zip",
+      "sha256": "cc036b06ad3bdcf7003690b00d82719980c374e48a95bf0654f9959148d263aa",
+      "license": "MIT"
+    },
+    {
+      "id": "unitypy",
+      "name": "UnityPy",
+      "kind": "pip",
+      "category": "05_Game-Mods-and-Assets",
+      "packages": [
+        "UnityPy"
+      ],
+      "license": "MIT"
+    },
+    {
+      "id": "scylla",
+      "name": "Scylla",
+      "kind": "release",
+      "category": "06_Memory-and-Instrumentation",
+      "repo": "NtQuery/Scylla",
+      "tag": "v0.9.8",
+      "asset": "Scylla_v0.9.8.rar",
+      "extract": "rar",
+      "sha256": "48a4338d999ec5f33b5964c51893a04fc9e2d104b0c7786f50751f7db5dcbe52",
+      "license": "GPL-3.0"
     }
   ]
 }

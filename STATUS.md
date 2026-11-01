@@ -13,12 +13,12 @@ pinned in `manifest/tools.json`) into `tools/` at install time.
 | `02_Debuggers` | x64dbg, dnSpy, ScyllaHide, decomp2dbg |
 | `03_Source-Decompilers` | RetDec, jadx, apktool, JPEXS FFDec, ILSpy, Recaf, de4dot |
 | `04_Static-Recompilation` | xboxrecomp, N64Recomp (+RecompModTool), XenonRecomp, gba-matching-decomp-skill |
-| `05_Game-Mods-and-Assets` | AssetRipper, UABEA, Il2CppDumper, Cpp2IL, BepInEx, MelonLoader, FModel, UAssetGUI, UE4SS, repak, GDRE Tools, UndertaleModTool, vgmstream, quickbms, xdelta3, flips, armips, asar, xdvdfs, Crowbar |
-| `06_Memory-and-Instrumentation` | Frida, ReClass.NET, SystemInformer, Squalr |
+| `05_Game-Mods-and-Assets` | AssetRipper, UABEA, UnityPy, Il2CppDumper, Cpp2IL, BepInEx, MelonLoader, FModel, UAssetGUI, UE4SS, repak, retoc, GDRE Tools, UndertaleModTool, vgmstream, quickbms, xdelta3, flips, armips, asar, xdvdfs, Crowbar |
+| `06_Memory-and-Instrumentation` | Frida, Scylla, ReClass.NET, SystemInformer, Squalr |
 | `07_Network-and-APIs` | Mitmproxy, Objection |
 
 Python libs (via pip): capstone, pefile, lief, keystone, unicorn, dnfile, frida,
-decomp2dbg, rzpipe, angr, androguard, mitmproxy, objection.
+decomp2dbg, rzpipe, angr, androguard, mitmproxy, objection, UnityPy.
 
 `kind` is one of `release` (pinned GitHub asset), `git` (clone), `pip`, or `direct`
 (official upstream installer URL, resolved per OS). `git`/`pip` tools like Diaphora,
@@ -31,7 +31,8 @@ it is downloaded from `cdn.binary.ninja`, so no sha256 is pinned).
 
 `scripts/install-extras.ps1` covers: Cheat Engine (adware installer — decline all
 extras), IDA Free, RenderDoc, Ninja Ripper, console emulators, Sysinternals,
-Wireshark, Caido (Basic).
+WinDbg (+TTD), API Monitor, PEStudio, Reko (needs .NET 8), pyinstxtractor-ng
+(venv), Wireshark, Caido (Basic).
 
 ## Roadmap
 
