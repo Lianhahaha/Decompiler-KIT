@@ -85,7 +85,7 @@ first — the GBA skill exists exactly for that.
 
 ### PE / binary utilities worth adding
 - **PE-bear** — https://github.com/hasherezade/pe-bear — PE viewer/editor.
-- **Scylla** — https://github.com/NtQuery/Scylla — import table reconstruction (after unpacking).
+- **Scylla** — https://github.com/NtQuery/Scylla — import table reconstruction (after unpacking; now bundled).
 - **CFF Explorer** — https://ntcore.com/?page_id=388 — PE editing.
 - **HxD** — https://mh-nexus.de/en/hxd/ — fast hex editor.
 - **Sysinternals Suite** — https://learn.microsoft.com/sysinternals/ — Process Explorer,
@@ -137,6 +137,16 @@ first — the GBA skill exists exactly for that.
 - **Cpp2IL** — IL2CPP metadata/code recovery; output can be opened in dnSpy/ILSpy when Il2CppDumper's dummy DLLs are not enough.
 - **vgmstream** — reference decoder for game audio; `vgmstream-cli` converts `.wem`, `.adx`, `.hca`, `.fsb`, etc. to WAV.
 - **UPX** — unpack UPX-packed binaries before Ghidra/rizin sees them.
+
+## Newly added (layer 5 — decompilers + modern modding)
+
+- **Hyperion** — https://github.com/Sidenai/hyperion-disassembler — multi-arch disassembler + x86/x64/ARM64 decompiler (GUI, MIT): PE/ELF/Mach-O/.NET, RTTI recovery, FLIRT, packer detection.
+- **Vineflower** — https://github.com/Vineflower/vineflower — modern Fernflower fork; best-in-class JVM bytecode → Java (Java 21+ features), standalone jar.
+- **Kaitai Struct** — https://github.com/kaitai-io/kaitai_struct_compiler — `.ksy` specs → parsers in Python/C++/Java/etc.; ideal for custom asset formats.
+- **retoc** — https://github.com/trumank/retoc — Unreal Engine IoStore (`.utoc`/`.ucas`) pack/unpack + Zen↔legacy conversion; complements `repak` for UE5.
+- **UnityPy** — https://github.com/K0lb3/UnityPy — Python Unity asset/bundle reader/editor for scripted bulk extraction.
+- **pyinstxtractor-ng** — https://github.com/pyinstxtractor/pyinstxtractor-ng — unpacks PyInstaller executables (Python games) to `.pyc`; not bundled (it pins an old `pycryptodome`) — install in a venv.
+- **ret-sync** — https://github.com/bootleg/ret-sync — sync symbols/comments/breakpoints between Ghidra/IDA/Binja and x64dbg/GDB.
 
 Removed as redundant: **dex2jar** (jadx handles APK → Java), **Miasm** (angr covers
 symbolic execution), **extract-xiso** (xdvdfs extracts and builds XISOs).

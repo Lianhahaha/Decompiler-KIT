@@ -26,6 +26,12 @@ if(W "emulators"){ Winget "DolphinEmu.Dolphin"; Winget "PCSX2Team.PCSX2"; Winget
 # API / process monitoring
 if(W "monitor"){ Winget "Microsoft.Sysinternals.ProcessExplorer"; Winget "Microsoft.Sysinternals.ProcessMonitor"; Write-Host "API Monitor: http://www.rohitab.com/apimonitor" }
 
+# Extra decompilers / Windows debugging (not pinned in the manifest)
+if(W "windbg"){ Winget "Microsoft.WinDbg" }
+if(W "pestudio"){ Write-Host "PEStudio: https://www.winitor.com/download" }
+if(W "reko"){ Write-Host "Reko (requires the .NET 8 runtime): https://github.com/uxmal/reko/releases" }
+if(W "pyinstxtractor"){ Write-Host "pyinstxtractor-ng (PyInstaller unpacker; use a venv — it pins an old pycryptodome): https://github.com/pyinstxtractor/pyinstxtractor-ng" }
+
 # Network / API interception (Mitmproxy + Objection are auto-bundled via pip)
 if(W "wireshark"){ Winget "WiresharkFoundation.Wireshark" }
 if(W "caido"){ Write-Host "Caido Basic (free tier, account required): https://caido.io" }

@@ -2,9 +2,9 @@
 
 A self-installing, reproducible toolkit for **decompiling, reverse-engineering, and
 statically recompiling binaries**, with an accompanying asset-pipeline and runtime tooling
-set. One command installs 60+ tools (Ghidra, Binary Ninja Free, rizin/Cutter, RetDec, x64dbg,
-dnSpy, ILSpy, jadx, Frida, MinHook, VPKEdit, angr, xboxrecomp, N64Recomp, XenonRecomp, and
-more) from their official upstream releases, with per-tool SHA-256 verification where
+set. One command installs 70+ tools (Ghidra, Hyperion, Binary Ninja Free, rizin/Cutter, RetDec,
+Vineflower, x64dbg, dnSpy, ILSpy, jadx, Frida, MinHook, retoc, VPKEdit, angr, xboxrecomp,
+N64Recomp, XenonRecomp, and more) from their official upstream releases, with per-tool SHA-256 verification where
 upstream pins allow it, plus license attribution.
 
 The repo itself is small (this is a bootstrap + manifest, no tool binaries). Everything is
@@ -240,6 +240,7 @@ paths below show the category and tool id.
 | --- | --- |
 | **Ghidra** | NSA's decompiler suite; headless mode (`analyzeHeadless`) for automation, scriptable in Python/Java. |
 | **GhidraMCP** | MCP bridge so an agent can drive Ghidra (GUI or headless). |
+| **Hyperion** | Multi-arch disassembler + decompiler (GUI): PE/ELF/Mach-O/.NET, x86/x64/ARM/ARM64/MIPS/PPC, RTTI recovery, packer detection, FLIRT signatures. MIT, single exe, no installer. |
 | **Binary Ninja (Free)** | Vector 35's decompiler UI with an integrated debugger and built-in MCP server. Free tier covers x86/x86_64/ARMv7/AArch64, non-commercial, no API/plugins. Installer is downloaded per OS; run it once. |
 | **rizin** | Fast CLI reverse-engineering framework (radare2 lineage); `-A` auto-analysis, xrefs, scripting. |
 | **Cutter** | GUI front-end for rizin. |
@@ -254,6 +255,7 @@ paths below show the category and tool id.
 | **angr + androguard** | Symbolic execution / binary analysis; Android APK analysis. |
 | **Diaphora** | Binary diffing (patch analysis / version diffing). Plugin for IDA Pro / Ghidra. |
 | **Triton** | Dynamic binary analysis + symbolic execution / taint tracking (built from source). |
+| **Kaitai Struct Compiler** | Compiles `.ksy` format specs into parsers (Python/C++/Java/…); reverse and script custom asset formats. Needs Java. |
 
 ### `02_Debuggers` — runtime truth
 
@@ -263,6 +265,7 @@ paths below show the category and tool id.
 | **dnSpy (dnSpyEx)** | .NET decompiler + debugger + assembly editor. |
 | **ScyllaHide** | Anti-anti-debug plugin for x64dbg (hides debugger from checks). |
 | **decomp2dbg** | Syncs Ghidra/IDA/Binja symbols into GDB. |
+| **ret-sync** | Bidirectional symbol/comment/breakpoint sync between Ghidra/IDA/Binja and x64dbg/GDB (source clone; see its README to install the plugins). |
 
 ### `03_Source-Decompilers` — binary → source
 
@@ -274,6 +277,7 @@ paths below show the category and tool id.
 | **JPEXS FFDec** | Flash/SWF decompiler + editor. |
 | **ILSpy** | Clean .NET C# decompiler (readable output). |
 | **Recaf** | Java bytecode editor/analyzer. |
+| **Vineflower** | Modern Fernflower fork — best-in-class Java bytecode → Java (records, sealed classes, pattern matching); standalone jar, Java 17+. |
 | **de4dot** | .NET deobfuscator (un-rename, string decrypt, un-ConfuserEx). |
 
 ### `04_Static-Recompilation` — binary → native source
@@ -291,6 +295,7 @@ paths below show the category and tool id.
 | --- | --- |
 | **AssetRipper** | Unity assets → Unity project. |
 | **UABEA** | Unity asset/bundle editor. |
+| **UnityPy** | Python library for Unity assets/bundles — scripted bulk export and edits (pip). |
 | **Il2CppDumper** | Recover types/methods/structs from IL2CPP `GameAssembly.dll` + `global-metadata.dat`. |
 | **Cpp2IL** | Modern IL2CPP → C#/DLL recovery; fallback when Il2CppDumper struggles with newer Unity. |
 | **BepInEx** | Unity Mono + IL2CPP mod loader. |
@@ -299,6 +304,7 @@ paths below show the category and tool id.
 | **UAssetGUI** | Edit Unreal `.uasset` files with a GUI. |
 | **UE4SS** | Unreal Engine 4/5 scripting system: Lua/C++ mods, blueprint dumps, live property editing. |
 | **repak** | Unreal `.pak` packer/unpacker (CLI). |
+| **retoc** | Unreal Engine IoStore packer/unpacker (`.utoc`/`.ucas`) + Zen↔legacy conversion — the UE5 complement to repak. |
 | **GDRE Tools** | Godot `.pck` extractor + project decompiler (GDScript/C#). |
 | **UndertaleModTool** | GameMaker (`data.win`) unpacker/decompiler/repacker: code, assets, and mods. |
 | **VPKEdit** | Source VPK/PCK reader and writer (CLI + GUI): list, extract, pack, modify, sign. |
@@ -322,6 +328,7 @@ paths below show the category and tool id.
 | **ReClass.NET** | Live memory scanner + C++ structure builder (pairs with x64dbg). |
 | **SystemInformer** | Process/memory/handle inspector (Sysinternals-style). |
 | **Squalr** | Open-source memory scanner (Cheat Engine alternative). |
+| **Scylla** | IAT dumper/rebuilder for unpacked or dumped binaries (import reconstruction; `.rar` needs 7-Zip). |
 
 ### `07_Network-and-APIs` — traffic & API analysis
 
@@ -346,7 +353,8 @@ Installed via `pip` by the `py-libs` manifest entry (and a few standalone entrie
 - `keystone-engine` — assembler
 - `unicorn` — CPU emulator
 - `dnfile` — .NET metadata parsing
-- plus `frida`, `decomp2dbg`, `rzpipe`, `angr`, `androguard`, `mitmproxy`, `objection`
+- plus `frida`, `decomp2dbg`, `rzpipe`, `angr`, `androguard`, `mitmproxy`, `objection`,
+  `UnityPy` (Unity asset automation)
 
 ## Triage in 30 seconds
 
@@ -372,7 +380,9 @@ rizin -q -c "iI; ii; iS" target.exe
 | `Managed/Assembly-CSharp.dll` | Unity Mono → dnSpy / BepInEx |
 | `global-metadata.dat` + `GameAssembly.dll` | Unity IL2CPP → Cpp2IL / Il2CppDumper + MelonLoader |
 | `gameinfo.txt` + `pak01_dir.vpk` | Source → VPKEdit / BSPSource / cfg mods (docs/source-engine.md) |
-| `.pak` + `Engine/` | Unreal → FModel / UAssetGUI / UE4SS |
+| `.pak` + `Engine/` | Unreal (legacy) → FModel / UAssetGUI / UE4SS / repak |
+| `.utoc` + `.ucas` in `Content/Paks` | Unreal IoStore → retoc, then FModel / UAssetGUI |
+| `.jar` / `.class` | Vineflower (decompile) / Recaf (edit) |
 | `.pck` + `project.godot` | Godot → GDRE Tools |
 | `data.win` / `game.win` | GameMaker → UndertaleModTool |
 | `default.xbe` | Original Xbox → xboxrecomp + xdvdfs |
@@ -525,7 +535,8 @@ powershell -ExecutionPolicy Bypass -File .\scripts\install-extras.ps1 -Only wire
 ```
 
 Covers: Cheat Engine (decline bundled extras), IDA Free, RenderDoc, Ninja Ripper,
-Dolphin/PCSX2/Ryujinx/PPSSPP/melonDS/BizHawk, Sysinternals, Wireshark, Caido.
+Dolphin/PCSX2/Ryujinx/PPSSPP/melonDS/BizHawk, Sysinternals, WinDbg (+TTD), API Monitor,
+PEStudio, Reko (needs the .NET 8 runtime), pyinstxtractor-ng (use a venv), Wireshark, Caido.
 Binary Ninja Free is handled by the bootstrap (see [Quick start](#quick-start)); only paid
 Binary Ninja editions are manual.
 
