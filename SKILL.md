@@ -1,6 +1,6 @@
 ---
 name: decompiler-kit
-description: Decompile, reverse engineer, recompile, and mod games with a self-installing local toolkit. Use for native PC game binaries, Unity/Unreal/Godot/.NET/Android games, Xbox/Xbox 360/N64/GBA recompilation or matching decompilation, asset extraction, archive unpacking, audio extraction, memory scanning, and runtime hooking. First run bootstrap (./bootstrap.sh or bootstrap.ps1) then activate env (source env.sh or . .\env.ps1). Covers Ghidra (+ GhidraMCP), Binary Ninja Free, rizin/Cutter, RetDec, x64dbg, dnSpy, ILSpy, jadx, apktool, JPEXS FFDec, capa, floss, PE-bear, ImHex, Detect It Easy, UPX, Frida, AssetRipper, UABEA, Il2CppDumper, Cpp2IL, BepInEx, MelonLoader, FModel, UAssetGUI, UE4SS, repak, GDRE Tools, UndertaleModTool, vgmstream, quickbms, xdelta3, flips, ReClass.NET, xboxrecomp, N64Recomp, XenonRecomp.
+description: Decompile, reverse engineer, recompile, and mod games with a self-installing local toolkit. Use for native PC game binaries, Unity/Unreal/Godot/.NET/Android games, Xbox/Xbox 360/N64/GBA recompilation or matching decompilation, asset extraction, archive unpacking, audio extraction, memory scanning, and runtime hooking. First run bootstrap (./bootstrap.sh or bootstrap.ps1) then activate env (source env.sh or . .\env.ps1). Covers Ghidra (+ GhidraMCP), Hyperion, Binary Ninja Free, rizin/Cutter, RetDec, Vineflower, Kaitai Struct, x64dbg, ret-sync, dnSpy, ILSpy, jadx, apktool, JPEXS FFDec, capa, floss, PE-bear, ImHex, Detect It Easy, UPX, Frida, Scylla, AssetRipper, UABEA, UnityPy, Il2CppDumper, Cpp2IL, BepInEx, MelonLoader, FModel, UAssetGUI, UE4SS, repak, retoc, GDRE Tools, UndertaleModTool, vgmstream, quickbms, xdelta3, flips, ReClass.NET, xboxrecomp, N64Recomp, XenonRecomp.
 metadata:
   version: "2"
 ---
@@ -43,12 +43,12 @@ hardcoded paths. Tools live at `<root>/<category>/<id>`, e.g. `<root>/01_Disasse
 
 | Category | Tools |
 | --- | --- |
-| `01_Disassemblers` | Ghidra, GhidraMCP, Binary Ninja (Free installer), rizin, Cutter, Detect It Easy, PE-bear, capa, floss, ImHex, UPX, Dependencies, CyberChef, angr, Diaphora, Triton |
-| `02_Debuggers` | x64dbg, dnSpy, ScyllaHide, decomp2dbg |
-| `03_Source-Decompilers` | RetDec, jadx, apktool, JPEXS FFDec, ILSpy, Recaf, de4dot |
+| `01_Disassemblers` | Ghidra, GhidraMCP, Hyperion, Binary Ninja (Free installer), rizin, Cutter, Detect It Easy, PE-bear, capa, floss, ImHex, UPX, Dependencies, CyberChef, angr, Kaitai Struct, Diaphora, Triton |
+| `02_Debuggers` | x64dbg, dnSpy, ScyllaHide, decomp2dbg, ret-sync |
+| `03_Source-Decompilers` | RetDec, Vineflower, jadx, apktool, JPEXS FFDec, ILSpy, Recaf, de4dot |
 | `04_Static-Recompilation` | xboxrecomp, N64Recomp, XenonRecomp, gba-matching-decomp-skill |
-| `05_Game-Mods-and-Assets` | AssetRipper, UABEA, Il2CppDumper, Cpp2IL, BepInEx, MelonLoader, FModel, UAssetGUI, UE4SS, repak, GDRE Tools, UndertaleModTool, vgmstream, quickbms, xdelta3, flips, armips, asar, xdvdfs, Crowbar |
-| `06_Memory-and-Instrumentation` | Frida, ReClass.NET, SystemInformer, Squalr |
+| `05_Game-Mods-and-Assets` | AssetRipper, UABEA, UnityPy, Il2CppDumper, Cpp2IL, BepInEx, MelonLoader, FModel, UAssetGUI, UE4SS, repak, retoc, GDRE Tools, UndertaleModTool, vgmstream, quickbms, xdelta3, flips, armips, asar, xdvdfs, Crowbar |
+| `06_Memory-and-Instrumentation` | Frida, Scylla, ReClass.NET, SystemInformer, Squalr |
 | `07_Network-and-APIs` | Mitmproxy, Objection |
 
 ## Triage (30 seconds)
@@ -65,7 +65,9 @@ rizin -q -c "iI; ii; iS" game.exe                                     # headers/
 | `UnityPlayer.dll` / `GameAssembly.dll` / `*_Data\` | Unity |
 | `Assembly-CSharp.dll` in `Managed\` | Unity Mono → dnSpy / BepInEx |
 | `global-metadata.dat` + `GameAssembly.dll` | Unity IL2CPP → Cpp2IL / Il2CppDumper + MelonLoader |
-| `.pak` + `Engine` folder | Unreal → FModel / UAssetGUI / UE4SS / repak |
+| `.pak` + `Engine` folder | Unreal legacy → FModel / UAssetGUI / UE4SS / repak |
+| `.utoc` + `.ucas` in `Content/Paks` | Unreal IoStore → retoc, then FModel / UAssetGUI |
+| `.jar` / `.class` | Vineflower / Recaf |
 | `.pck` + `project.godot` | Godot → GDRE Tools |
 | `data.win` / `game.win` | GameMaker → UndertaleModTool |
 | `default.xbe` | Original Xbox → xboxrecomp + xdvdfs |
@@ -83,6 +85,17 @@ $g = (Get-ChildItem "$GAME_RE_ROOT\01_Disassemblers\ghidra" -Directory | Sort Na
 & "$g\ghidraRun.bat"                                              # GUI
 & "$g\support\analyzeHeadless.bat" C:\work\proj p1 -import game.exe   # headless
 & "$GAME_RE_ROOT\03_Source-Decompilers\retdec\bin\retdec-decompiler.exe" --cleanup -o game.c game.exe
+& "$GAME_RE_ROOT\01_Disassemblers\hyperion\Hyperion.exe" game.exe      # GUI; F5 = decompile
+```
+
+### Java binaries (JAR / class)
+```powershell
+java -jar "$GAME_RE_ROOT\03_Source-Decompilers\vineflower\vineflower-1.11.1.jar" game.jar out-dir
+```
+
+### Custom binary formats (Kaitai)
+```powershell
+& "$GAME_RE_ROOT\01_Disassemblers\kaitai-struct\kaitai-struct-compiler-0.11\bin\kaitai-struct-compiler.bat" --help
 ```
 
 ### Agent-driven Ghidra (MCP)
@@ -102,6 +115,7 @@ python -m ghidra_mcp --headless --binary game.exe --save   # headless MCP stdio
 # IL2CPP: Cpp2IL first on recent Unity, Il2CppDumper as fallback
 & "$GAME_RE_ROOT\05_Game-Mods-and-Assets\cpp2il\Cpp2IL-2022.0.7-Windows.exe" --game-path "Game" --output "cpp2il-out"
 & "$GAME_RE_ROOT\05_Game-Mods-and-Assets\il2cppdumper\Il2CppDumper.exe" "Game\GameAssembly.dll" "Game\global-metadata.dat" "dump-out"
+python -c "import UnityPy; e=UnityPy.load(r'Game\...\resources.assets'); print(len(e.objects))"  # scripted asset pass
 ```
 
 ### Unreal Engine (pak / uasset / runtime mods)
@@ -109,6 +123,8 @@ python -m ghidra_mcp --headless --binary game.exe --save   # headless MCP stdio
 & "$GAME_RE_ROOT\05_Game-Mods-and-Assets\fmodel\FModel.exe"          # browse/export assets
 & "$GAME_RE_ROOT\05_Game-Mods-and-Assets\uassetgui\UAssetGUI.exe"     # edit .uasset
 & "$GAME_RE_ROOT\05_Game-Mods-and-Assets\repak\repak.exe" --help      # pack/unpack .pak
+& "$GAME_RE_ROOT\05_Game-Mods-and-Assets\retoc\retoc.exe" --help      # UE5 .utoc/.ucas (IoStore)
+& "$GAME_RE_ROOT\05_Game-Mods-and-Assets\retoc\retoc.exe" unpack --help
 # UE4SS: copy the extracted files into <Game>\Binaries\Win64
 ```
 
@@ -158,6 +174,8 @@ as its own agent skill). Needs agbcc + arm-none-eabi toolchain (see docs/researc
 ```powershell
 frida-trace -p <pid> -i "CreateFile*"
 & "$GAME_RE_ROOT\06_Memory-and-Instrumentation\reclass\x64\ReClass.NET.exe"
+& "$GAME_RE_ROOT\06_Memory-and-Instrumentation\scylla\Scylla_x64.exe"  # dump/rebuild IAT after unpacking
+# ret-sync: source clone in 02_Debuggers\ret-sync (Ghidra script + x64dbg plugin; see its README)
 ```
 
 ## Reporting results
