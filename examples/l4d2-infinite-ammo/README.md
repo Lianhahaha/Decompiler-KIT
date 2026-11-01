@@ -28,8 +28,12 @@ launcher.exe +map c1m1_hotel
 
 A shortcut with the argument `+map c1m1_hotel` is the friendliest form. Replace
 `c1m1_hotel` with `c2m1_highway`, `c3m1_plankcountry`, `c4m1_milltown_a` or
-`c5m1_waterfront` for the other campaigns. The console (`~`) `map <name>` command
-works too.
+`c5m1_waterfront` for the other campaigns, or make one shortcut per campaign. The
+console (`~`) `map <name>` command works too.
+
+Once a campaign is running, chapter transitions are fine: `changelevel` runs
+`listenserver.cfg` again and there is no lobby to reset it. Verified
+`c1m1_hotel` -> `c1m2_streets` with `sv_cheats = 1` on both maps.
 
 ## Why the launch argument matters
 
@@ -59,6 +63,8 @@ Same machine, same cfg, two launch paths, `F4` status bind:
 | Launch | `sv_cheats` | `sv_infinite_ammo` | `give` works |
 | --- | --- | --- | --- |
 | `+map c1m1_hotel` | 1 | 1 | yes |
+| `+map c2m1_highway` | 1 | 1 | not re-tested |
+| `changelevel` c1m1 -> c1m2 | 1 | 1 | not re-tested |
 | Campaign via main menu | 0 | 0 | no (`Can't use cheat command give...`) |
 
 Ammo A/B with a hunting rifle (15/150):

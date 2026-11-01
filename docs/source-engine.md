@@ -93,8 +93,10 @@ any other cheat convar, then keep the keybinds and aliases in a separate cfg tha
 Tested on build 7970: `listenserver.cfg` printed its `sv_cheats 1` line, then the map
 loaded with `sv_cheats = 0`. A direct `map <name>` start (or `+map <name>` on the
 launch command line, which SmartSteamEmu/`launcher.exe` passes through) skips the
-lobby and the same cfg sticks. Use `map` for a modded session; the campaign menu is
-fine for unmodded play.
+lobby and the same cfg sticks. Chapter transitions after a direct start are fine:
+`changelevel` re-runs `listenserver.cfg` with no lobby, and `sv_cheats` stayed 1
+across `c1m1_hotel` -> `c1m2_streets`. Use `map`/`+map` for a modded session; the
+campaign menu is fine for unmodded play.
 
 A worked example, including the exact keys and the verification log lines, is in
 `examples/l4d2-infinite-ammo/`.
