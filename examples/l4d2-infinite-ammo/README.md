@@ -26,14 +26,31 @@ Then launch with a direct map start, not through the campaign menu:
 launcher.exe +map c1m1_hotel
 ```
 
-A shortcut with the argument `+map c1m1_hotel` is the friendliest form. Replace
-`c1m1_hotel` with `c2m1_highway`, `c3m1_plankcountry`, `c4m1_milltown_a` or
-`c5m1_waterfront` for the other campaigns, or make one shortcut per campaign. The
-console (`~`) `map <name>` command works too.
+A shortcut per campaign is the practical setup. First map of each:
+
+| Campaign | Map |
+| --- | --- |
+| Dead Center | `c1m1_hotel` |
+| Dark Carnival | `c2m1_highway` |
+| Swamp Fever | `c3m1_plankcountry` |
+| Hard Rain | `c4m1_milltown_a` |
+| The Parish | `c5m1_waterfront` |
+| The Passing | `c6m1_riverbank` |
+| The Sacrifice | `c7m1_docks` |
+| No Mercy | `c8m1_apartment` |
+| Crash Course | `c9m1_alleys` |
+| Death Toll | `c10m1_caves` |
+| Dead Air | `c11m1_greenhouse` |
+| Blood Harvest | `c12m1_hilltop` |
+| Cold Stream | `c13m1_alpinecreek` |
+| The Last Stand | `c14m1_junkyard` |
+
+The console (`~`) `map <name>` command works too, including custom campaigns.
 
 Once a campaign is running, chapter transitions are fine: `changelevel` runs
 `listenserver.cfg` again and there is no lobby to reset it. Verified
-`c1m1_hotel` -> `c1m2_streets` with `sv_cheats = 1` on both maps.
+`c1m1_hotel` -> `c1m2_streets` with `sv_cheats = 1` on both maps, and
+`c7m1_docks` from a shortcut with `sv_cheats = 1`.
 
 ## Why the launch argument matters
 
@@ -45,6 +62,13 @@ a campaign from the main menu therefore ends with cheats off:
 L4D2 Unlimited: cheats ON, infinite ammo ON   <- cfg ran
 Map: c1m1_hotel
 "sv_cheats" = "0"                             <- lobby reset it
+```
+
+The game states the same thing in its own console:
+
+```
+Can't use cheats now; please exit to main menu and start your own listen server
+with "map mapname" so that you could enable cheats.
 ```
 
 A direct `map` start skips the lobby, so the same cfg sticks:

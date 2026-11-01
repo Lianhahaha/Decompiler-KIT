@@ -90,11 +90,13 @@ any other cheat convar, then keep the keybinds and aliases in a separate cfg tha
 
 **L4D2 caveat:** starting a campaign from the main menu creates a lobby that resets
 `sv_cheats` to 0 *after* `listenserver.cfg` runs, so the cheats silently turn off.
-Tested on build 7970: `listenserver.cfg` printed its `sv_cheats 1` line, then the map
-loaded with `sv_cheats = 0`. A direct `map <name>` start (or `+map <name>` on the
-launch command line, which SmartSteamEmu/`launcher.exe` passes through) skips the
-lobby and the same cfg sticks. Chapter transitions after a direct start are fine:
-`changelevel` re-runs `listenserver.cfg` with no lobby, and `sv_cheats` stayed 1
+The game prints the reason itself: *"Can't use cheats now; please exit to main menu
+and start your own listen server with 'map mapname' so that you could enable
+cheats."* Tested on build 7970: `listenserver.cfg` printed its `sv_cheats 1` line,
+then the map loaded with `sv_cheats = 0`. A direct `map <name>` start (or `+map
+<name>` on the launch command line, which SmartSteamEmu/`launcher.exe` passes through)
+skips the lobby and the same cfg sticks. Chapter transitions after a direct start are
+fine: `changelevel` re-runs `listenserver.cfg` with no lobby, and `sv_cheats` stayed 1
 across `c1m1_hotel` -> `c1m2_streets`. Use `map`/`+map` for a modded session; the
 campaign menu is fine for unmodded play.
 
