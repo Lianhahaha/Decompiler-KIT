@@ -83,6 +83,9 @@ You do the tool selection:
 
 - Tool versions, assets, and hashes live in `manifest/tools.json`; the env scripts and both
   bootstrappers read the same manifest. Adding a tool is a data change.
+- A new tool also needs a `NOTICE.md` row (upstream URL + license) and belongs in the
+  category lists. `python scripts/check_manifest.py` — what CI runs — fails if a manifest id
+  is unattributed, a category is undocumented, or a "N tools" count in the prose is stale.
 - Keep Windows (`.ps1`) and Unix (`.sh`) paths in sync.
 - `SKILL.md` documents per-target reverse-engineering workflows for agents; read it before
   choosing a decompilation path.
