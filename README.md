@@ -7,9 +7,9 @@ Vineflower, x64dbg, dnSpy, ILSpy, jadx, Frida, MinHook, retoc, VPKEdit, angr, xb
 N64Recomp, XenonRecomp, and more) from their official upstream releases, with per-tool SHA-256 verification where
 upstream pins allow it, plus license attribution.
 
-The repo itself is small (this is a bootstrap + manifest, no tool binaries). Everything is
-declared in a single machine-readable manifest and materialised locally on demand, so the
-installed layout is deterministic and reproducible across machines.
+The repo carries no tool binaries (this is a bootstrap + manifest plus one vendored source
+tree). Everything is declared in a single machine-readable manifest and materialised locally
+on demand, so the installed layout is deterministic and reproducible across machines.
 
 > No tool binaries are stored in this repository. `bootstrap.ps1` / `bootstrap.sh` download
 > each tool from its official upstream release at install time (the full install is ~5 GB).
