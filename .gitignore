@@ -2,7 +2,6 @@
 /tools/
 /_downloads/
 /install.log
-/MANIFEST.csv
 *.pyc
 __pycache__/
 .DS_Store
