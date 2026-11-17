@@ -16,6 +16,7 @@ bootstrap.sh           (macOS/Linux) -> installs into ./tools/
 env.ps1 / env.sh       -> activate PATH + GHIDRA_HOME for a session
 manifest/tools.json    -> pinned versions + sha256
 NOTICE.md              -> per-tool licenses
+dissectdat/            -> vendored REA source (MIT), not a download: `cd dissectdat && npm install`
 ```
 
 ## First use
