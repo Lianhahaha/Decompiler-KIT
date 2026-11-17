@@ -87,5 +87,8 @@ You do the tool selection:
   category lists. `python scripts/check_manifest.py` — what CI runs — fails if a manifest id
   is unattributed, a category is undocumented, or a "N tools" count in the prose is stale.
 - Keep Windows (`.ps1`) and Unix (`.sh`) paths in sync.
+- `dissectdat/` is a vendored third-party source tree (REA, MIT), not a manifest entry:
+  it ships with the clone, is installed with `npm install`, and is not touched by the
+  bootstrappers. Do not rewrite it when editing toolkit docs.
 - `SKILL.md` documents per-target reverse-engineering workflows for agents; read it before
   choosing a decompilation path.
