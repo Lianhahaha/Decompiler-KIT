@@ -13,13 +13,14 @@ set -u
 REPO_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 ROOT="${GAME_RE_ROOT:-$REPO_ROOT/tools}"
 DL="$ROOT/_downloads"
+LOG="$ROOT/install.log"
 MAN="$REPO_ROOT/manifest/tools.json"
 FORCE=0
 [ "${1:-}" = "--force" ] && FORCE=1
 
 mkdir -p "$ROOT" "$DL"
 
-log(){ printf '[%s] %s\n' "$(date +%H:%M:%S)" "$*"; }
+log(){ local line; line="[$(date +%H:%M:%S)] $*"; printf '%s\n' "$line"; printf '%s\n' "$line" >> "$LOG"; }
 
 command -v python3 >/dev/null 2>&1 || { log "python3 required"; exit 1; }
 
