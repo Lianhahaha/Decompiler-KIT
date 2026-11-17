@@ -2,7 +2,7 @@
 
 A self-installing, reproducible toolkit for **decompiling, reverse-engineering, and
 statically recompiling binaries**, with an accompanying asset-pipeline and runtime tooling
-set. One command installs 70+ tools (Ghidra, Hyperion, Binary Ninja Free, rizin/Cutter, RetDec,
+set. One command installs 71 tools (Ghidra, Hyperion, Binary Ninja Free, rizin/Cutter, RetDec,
 Vineflower, x64dbg, dnSpy, ILSpy, jadx, Frida, MinHook, retoc, VPKEdit, angr, xboxrecomp,
 N64Recomp, XenonRecomp, and more) from their official upstream releases, with per-tool SHA-256 verification where
 upstream pins allow it, plus license attribution.
@@ -208,7 +208,7 @@ environment — invoke them via `python -m` or their entry-point scripts.
 
 ```
 decompiler-kit/
-├─ manifest/tools.json      # source of truth: 64 tools, 7 categories
+├─ manifest/tools.json      # source of truth: 71 tools, 7 categories
 ├─ bootstrap.ps1 | .sh      # installers (release / git / pip / direct kinds)
 ├─ env.ps1 | .sh            # session activation (PATH, GHIDRA_HOME, GAME_RE_ROOT)
 ├─ AGENTS.md                # AI-agent setup instructions (auto-install this kit)
