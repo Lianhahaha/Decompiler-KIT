@@ -1,8 +1,11 @@
 #!/usr/bin/env python3
-"""Validate manifest/tools.json.
+"""Validate manifest/tools.json and keep the docs honest about it.
 
-Schema checks run offline. `--urls` also probes every download URL with a HEAD
-request (falling back to a one-byte GET), which is what the weekly CI job does.
+Schema checks run offline, and so does the doc audit: every tool must be named in
+`NOTICE.md`, every category must appear in `STATUS.md`/`SKILL.md`/`README.md`, and
+the tool counts quoted in prose must match the manifest. `--urls` additionally
+probes every download URL with a HEAD request (falling back to a one-byte GET),
+which is what the weekly CI job does.
 
 Exit code 1 if any error is found, 0 otherwise.
 """
@@ -147,6 +150,60 @@ def check_pip(tid: str, tool: dict) -> None:
             err(f"{tid}: packages contains an empty value")
 
 
+DOCS = ("README.md", "STATUS.md", "SKILL.md", "NOTICE.md")
+COUNT_RE = re.compile(r"\b(\d+)(\+?)\s+tools\b")
+
+
+def labels_for(tool: dict) -> list[str]:
+    """Strings that count as naming this tool in prose."""
+    name = str(tool.get("name", ""))
+    labels = {str(tool.get("id", "")), name, re.sub(r"\s*\(.*?\)", "", name)}
+    for key in ("repo", "url"):
+        value = tool.get(key)
+        if isinstance(value, str) and value:
+            labels.add(value.rstrip("/").split("/")[-1])
+    for package in tool.get("packages") or []:
+        labels.add(str(package))
+    return sorted(label for label in labels if len(label) > 2)
+
+
+def check_docs(tools: list[dict], root: Path) -> None:
+    """Fail when the prose stops matching the manifest."""
+    docs: dict[str, str] = {}
+    for name in DOCS:
+        try:
+            docs[name] = (root / name).read_text(encoding="utf-8")
+        except OSError:
+            err(f"{name}: missing or unreadable")
+
+    notice = docs.get("NOTICE.md", "").lower()
+    if notice:
+        for tool in tools:
+            tid = str(tool.get("id", "?"))
+            labels = labels_for(tool)
+            if not any(label.lower() in notice for label in labels):
+                err(f"{tid}: not attributed in NOTICE.md (looked for: {', '.join(labels)})")
+
+    total = len(tools)
+    for name in ("README.md", "STATUS.md", "SKILL.md"):
+        text = docs.get(name, "")
+        for stated, plus in COUNT_RE.findall(text):
+            claimed = int(stated)
+            if plus:
+                if claimed > total:
+                    err(f"{name}: claims {stated}+ tools but the manifest has {total}")
+                elif claimed != total:
+                    warn(f"{name}: claims {stated}+ tools; manifest has {total} (state {total})")
+            elif claimed != total:
+                err(f"{name}: claims {stated} tools but the manifest has {total}")
+
+    for category in sorted({str(tool.get("category", "")) for tool in tools}):
+        for name in ("README.md", "STATUS.md", "SKILL.md"):
+            text = docs.get(name, "")
+            if text and category not in text:
+                err(f"{name}: category {category} is installed but not documented")
+
+
 def probe(url: str, attempts: int = 3) -> str:
     last: object = "no attempt"
     for attempt in range(1, attempts + 1):
@@ -177,6 +234,7 @@ def probe(url: str, attempts: int = 3) -> str:
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--urls", action="store_true", help="probe every download URL")
+    parser.add_argument("--no-docs", action="store_true", help="skip the doc consistency audit")
     parser.add_argument("--manifest", type=Path, default=MANIFEST)
     args = parser.parse_args()
 
@@ -207,6 +265,9 @@ def main() -> int:
             check_git(tid, tool)
         elif kind == "pip":
             check_pip(tid, tool)
+
+    if not args.no_docs:
+        check_docs(tools, args.manifest.resolve().parent.parent)
 
     for message in warnings:
         print(f"WARN  {message}")
