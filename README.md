@@ -224,7 +224,9 @@ decompiler-kit/
 ├─ scripts/
 │  ├─ install-extras.ps1    # Tier-D: adware/account-gated/big tools (winget + links)
 │  ├─ harden.ps1            # disable Ghidra usage metrics + GUI telemetry toggles
-│  └─ check_manifest.py     # schema + link checker (also runs in CI)
+│  └─ check_manifest.py     # schema + doc + link checker (also runs in CI)
+├─ .github/workflows/
+│  └─ manifest.yml          # CI: validate, weekly link probe, Windows/Linux smoke install
 ├─ dissectdat/              # vendored REA source (MIT, © morluto) — see above
 └─ tools/                   # created by bootstrap; NOT committed (gitignored)
 ```
