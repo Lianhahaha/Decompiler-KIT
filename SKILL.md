@@ -7,8 +7,9 @@ metadata:
 
 # Game RE / Decompilation / Modding toolkit
 
-A self-installing toolkit. It ships no binaries — run the bootstrap once to download
-everything (versions + sha256 pinned in `manifest/tools.json`) into `./tools/`.
+A self-installing toolkit. This repo is a curated index of upstream links, not a copy of the
+tools: it ships no binaries — run the bootstrap once to download everything (versions + sha256
+pinned in `manifest/tools.json`) into `./tools/`. Until that runs, no decompiler exists locally.
 
 ```
 bootstrap.ps1          (Windows)     -> installs into .\tools\
