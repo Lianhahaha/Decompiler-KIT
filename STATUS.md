@@ -1,9 +1,9 @@
 # Status & roadmap
 
 `decompiler-kit` is a self-installing toolkit for decompiling, reverse-engineering,
-recompiling, and modding games. No binaries live in this repo — `bootstrap.ps1` /
-`bootstrap.sh` download each tool from its official upstream release (versions + sha256
-pinned in `manifest/tools.json`) into `tools/` at install time.
+recompiling, and modding games. This repo is a curated index: no tool binaries live in it, only
+pins and links. `bootstrap.ps1` / `bootstrap.sh` download each tool from its official upstream
+release (versions + sha256 pinned in `manifest/tools.json`) into `tools/` at install time.
 
 ## Included tools
 
