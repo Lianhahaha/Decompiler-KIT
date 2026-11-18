@@ -7,16 +7,29 @@ Vineflower, x64dbg, dnSpy, ILSpy, jadx, Frida, MinHook, retoc, VPKEdit, angr, xb
 N64Recomp, XenonRecomp, and more) from their official upstream releases, with per-tool SHA-256 verification where
 upstream pins allow it, plus license attribution.
 
-The repo carries no tool binaries (this is a bootstrap + manifest plus one vendored source
-tree). Everything is declared in a single machine-readable manifest and materialised locally
-on demand, so the installed layout is deterministic and reproducible across machines.
+This repository contains **no tool binaries**. It is a curated index of pinned upstream
+downloads (`manifest/tools.json`) plus the scripts that fetch them: every entry names an
+official GitHub release asset, a vendor installer URL, a git repository, or PyPI packages, and
+the actual files are downloaded and SHA-256 verified at install time — never committed here.
+The one vendored source tree is `dissectdat/` (REA, MIT), which is source code, not a tool
+download.
 
-> No tool binaries are stored in this repository. `bootstrap.ps1` / `bootstrap.sh` download
-> each tool from its official upstream release at install time (the full install is ~5 GB).
-> Versions and hashes are pinned in `manifest/tools.json`.
+| In this repository | Not in this repository |
+| --- | --- |
+| `manifest/tools.json` — 71 curated pins (repo, tag, asset, sha256) | the tools themselves (Ghidra, x64dbg, RetDec, Cutter, …) |
+| `bootstrap.ps1` / `bootstrap.sh` — download, verify, extract | release archives, installers, jars, ISOs, ROMs |
+| `env.ps1` / `env.sh` — activate PATH + `GHIDRA_HOME` | pip site-packages (Frida, angr, mitmproxy, …) |
+| `SKILL.md`, `AGENTS.md`, `docs/`, one worked example | any binary this manifest does not name |
+| `dissectdat/` — vendored REA source (MIT) | — |
+
+> `bootstrap.ps1` / `bootstrap.sh` download each tool from its official upstream release at
+> install time (the full install is ~7 GB; the clone itself is ~90 MB). Versions and hashes are
+> pinned in `manifest/tools.json`.
 >
 > **AI agents:** if the user asks you to fetch/set up this repo, read `AGENTS.md` and run the
-> bootstrapper automatically — do not ask the user to download tools by hand.
+> bootstrapper automatically — do not ask the user to download tools by hand. Never state or
+> imply that this repository ships the decompilers or recompilers; it ships the links and pins
+> for them, and they only exist locally after the bootstrap runs.
 
 ---
 
