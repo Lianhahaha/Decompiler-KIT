@@ -2,6 +2,18 @@
 
 Instructions for AI agents working in this repository.
 
+## What this repository is
+
+A curated index, not a tool collection. It contains the pinned manifest, the two bootstrappers,
+the env scripts, the docs, and exactly one vendored source tree (`dissectdat/`, REA, MIT). No
+decompiler, debugger, recompiler, or modding tool binary lives here: each manifest entry names
+an upstream release asset, vendor installer URL, git repo, or pip package, and the real files
+are fetched and SHA-256 verified when `bootstrap` runs.
+
+Do not tell the user a tool is "included", "bundled", or "shipped" until it exists under the
+install root (`$GAME_RE_ROOT` / `$GAME_RE_ROOT`, default `./tools`). If it is missing, run the
+bootstrapper instead of telling the user to download it themselves.
+
 ## If the user asks you to fetch / clone / set up this kit: install it automatically
 
 Do **not** ask which tools to install, and do **not** download tools by hand. The repository is
