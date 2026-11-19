@@ -1,5 +1,8 @@
 # decompiler-kit
 
+[![manifest](https://github.com/Lianhahaha/Decompiler-KIT/actions/workflows/manifest.yml/badge.svg)](https://github.com/Lianhahaha/Decompiler-KIT/actions/workflows/manifest.yml)
+[![license: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
+
 A self-installing, reproducible toolkit for **decompiling, reverse-engineering, and
 statically recompiling binaries**, with an accompanying asset-pipeline and runtime tooling
 set. One command installs 71 tools (Ghidra, Hyperion, Binary Ninja Free, rizin/Cutter, RetDec,
