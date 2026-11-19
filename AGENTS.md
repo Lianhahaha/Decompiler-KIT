@@ -98,6 +98,7 @@ You do the tool selection:
 - A new tool also needs a `NOTICE.md` row (upstream URL + license) and belongs in the
   category lists. `python scripts/check_manifest.py` — what CI runs — fails if a manifest id
   is unattributed, a category is undocumented, or a "N tools" count in the prose is stale.
+  `python scripts/check_links.py` fails if a relative link or a `#heading` anchor is broken.
 - Keep Windows (`.ps1`) and Unix (`.sh`) paths in sync.
 - `dissectdat/` is a vendored third-party source tree (REA, MIT), not a manifest entry:
   it ships with the clone, is installed with `npm install`, and is not touched by the
