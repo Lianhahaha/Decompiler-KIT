@@ -21,6 +21,8 @@ jobs:
           python-version: "3.12"
       - name: Validate manifest
         run: python scripts/check_manifest.py
+      - name: Check documentation links
+        run: python scripts/check_links.py
 
   links:
     name: download links
